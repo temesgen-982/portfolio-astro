@@ -3,5 +3,5 @@
 </script>
 
 <button class="flex items-center p-3 border rounded">
-    <SunMoon strokeWidth={1} />
+    <Moon strokeWidth={1} />
 </button>

@@ -1,9 +1,9 @@
 ---
-// import ThemeToggle from './ThemeToggle.svelte';
+import ThemeToggle from './ThemeToggle.svelte';
 ---
 
-<header>
-    <nav class="flex justify-between border rounded p-3">
+<header class="flex gap-2 md:gap-3">
+    <nav class="flex justify-between border rounded p-3 grow">
         <a href="/">Home</a>
         <ul class="flex gap-4">
         <li><a href="/projects">Projects</a></li>
@@ -11,4 +11,5 @@
         <li><a href="/contact">Contact</a></li>
         </ul>
     </nav>
+    <ThemeToggle client:only />
 </header>
