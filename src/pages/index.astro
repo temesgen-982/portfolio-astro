@@ -1,11 +1,42 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import {getCollection, type CollectionEntry} from 'astro:content';
+
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Hero from '../components/Hero.astro';
+import ExperienceCard from '../components/ExperienceCard.astro';
+import SkillsSection from '../components/SkillsSection.astro';
+
+const WorkExperienceEntries = await getCollection('work');
+
+// 2. PREPARE THE DATA: Create a new array that includes the rendered content.
+//    We use Promise.all to handle the async `job.render()` for all entries.
+const workExperience = await Promise.all(
+    WorkExperienceEntries.map(async (job:CollectionEntry<'work'>) => {
+        const { Content } = await job.render();
+        return {
+            ...job, // Keep all the original job properties like slug, data, etc.
+            Content, // Add the rendered Content component to the object
+        };
+    })
+);
 ---
 
 <Layout>
-	<Welcome />
+	<Hero />
+	<section>
+		<h2 class="text-2xl mb-4">Work Experience</h2>
+		<div class="grid gap-6">
+			{workExperience.map((job) => (
+        		<ExperienceCard entry={job.data}>
+					<job.Content />
+        		</ExperienceCard>
+    		))}
+		</div>
+	</section>
+	<SkillsSection />
+	<div class="flex items-center justify-center gap-4 py-[4rem] bg-neutral-200 border rounded">
+		<a href="/" class="px-4 py-2 border rounded bg-white">Contact me</a>
+		<a href="/" class="px-4 py-2 border rounded bg-white">Check out my projects</a>
+	</div>
 </Layout>

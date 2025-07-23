@@ -1,0 +1,44 @@
+---
+// Step 1: Import the types for type-safety.
+// `CollectionEntry` is Astro's type for an item from a content collection.
+import type { CollectionEntry } from 'astro:content';
+
+// Step 2: Define the props the component expects.
+// We expect one prop named 'entry' which will be one of our 'work' items.
+interface Props {
+	entry: CollectionEntry<'work'>['data'];
+}
+
+// Step 3: Get the prop passed down from the parent page.
+const { entry } = Astro.props;
+
+// Helper function to format dates nicely.
+function formatDate(date: Date) {
+    return new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(date);
+}
+---
+
+<div class="flex gap-4">
+    <div class="flex flex-col items-center">
+        <div class="w-4 h-4 rounded-full border-2 border-green-400"></div>
+        <div class="flex-grow w-px bg-gray-600"></div>
+    </div>
+    <div class="border rounded grow p-4">
+        <p class="text-sm text-gray-400">
+            {formatDate(entry.startDate)} - {entry.endDate ? formatDate(entry.endDate) : 'Present'}
+        </p>
+        <h2 class="text-xl font-bold">{entry.company}</h2>
+        <p>📌{entry.location}</p>
+        <div class="prose prose-invert mt-2 text-gray-300">
+            <slot />
+        </div>
+        <!-- Render tags if they exist -->
+        {entry.tags && entry.tags.length > 0 && (
+            <div class="mt-4 flex flex-wrap gap-2">
+                {entry.tags.map((tag: unknown) => (
+                    <span class="rounded border px-3 py-1">{tag}</span>
+                ))}
+            </div>
+        )}
+    </div>
+</div>
