@@ -1,52 +1,98 @@
-# Astro Starter Kit: Basics
+# Portfolio – Astro & Svelte
 
-```sh
-npm create astro@latest -- --template basics
+A modern, fast, and fully customizable developer portfolio built with [Astro](https://astro.build/), [Svelte](https://svelte.dev/), and [Tailwind CSS](https://tailwindcss.com/).
+
+## ✨ Features
+
+- **Astro** for static site generation and fast performance
+- **Svelte** components for interactivity (e.g., theme toggle)
+- **Tailwind CSS** for styling and responsive design
+- **Dynamic content**:
+  - Work experience and education via Astro Content Collections
+  - Projects fetched from GitHub using Octokit
+  - Blog posts fetched from Dev.to API
+- **Contact form** with validation (Zod) and email sending via Resend
+- **Dark mode** toggle
+- **Icon support** via astro-icon and lucide-svelte
+- **TypeScript** for type safety
+
+## 🛠️ Technologies Used
+
+- Astro
+- Svelte
+- Tailwind CSS
+- TypeScript
+- Octokit (GitHub API)
+- Resend (email API)
+- Zod (form validation)
+- astro-icon, lucide-svelte (icons)
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18+ recommended)
+- npm
+
+### Installation
+```bash
+git clone https://github.com/temesgen-982/portfolio-astro.git
+cd portfolio-astro
+npm install
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+### Environment Variables
+Create a `.env` file in the root with the following (get your own API keys):
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+```
+GITHUB_TOKEN=your_github_token
+DEV_TO_API_KEY=your_devto_api_key
+DEV_TO_USERNAME=your_devto_username
+RESEND_API_KEY=your_resend_api_key
+```
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+### Development
+```bash
+npm run dev
+```
 
-## 🚀 Project Structure
+### Build
+```bash
+npm run build
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+### Preview
+```bash
+npm run preview
+```
 
-```text
+## 📁 Project Structure
+
+```
 /
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+├── public/                # Static assets
+├── src/
+│   ├── assets/            # Images, SVGs
+│   ├── components/        # Astro & Svelte components
+│   ├── content/           # Content collections (work, education)
+│   ├── layouts/           # Layout components
+│   ├── lib/               # Utility libraries (GitHub, posts, skills)
+│   ├── pages/             # Astro pages (index, blog, projects, contact)
+│   └── styles/            # Global CSS (Tailwind)
+├── package.json
+└── astro.config.mjs
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 📝 Customization
 
-## 🧞 Commands
+- **Add work experience:** Add markdown files to `src/content/work/`.
+- **Add education:** Add markdown files to `src/content/education/`.
+- **Update skills:** Edit `src/lib/skills.ts`.
+- **Update social links:** Edit `src/components/Hero.astro` and `Footer.astro`.
 
-All commands are run from the root of the project, from a terminal:
+## ☁️ Deployment
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+This project is ready to deploy on platforms like **Vercel** or **Netlify**.
 
-## 👀 Want to learn more?
+## 📄 License
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+MIT
