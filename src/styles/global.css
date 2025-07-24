@@ -1,3 +1,20 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --color-linen-white: hsl(0, 0%, 97%);
+  --color-light-gray: hsl(210, 20%, 92%);
+  --color-dark-slate: hsl(217, 19%, 16%);
+  --color-medium-gray: hsl(220, 9%, 57%);
+  --color-brand-teal: hsl(168, 72%, 54%);
+  --color-profile-green: hsl(84, 79%, 60%);
+}
+@theme {
+  --color-linen-white: hsl(0, 0%, 97%);
+  --color-light-gray: hsl(210, 20%, 92%);
+  --color-dark-slate: hsl(217, 19%, 16%);
+  --color-medium-gray: hsl(220, 9%, 57%);
+  --color-brand-teal: hsl(168, 72%, 54%);
+  --color-profile-green: hsl(84, 79%, 60%);
+}

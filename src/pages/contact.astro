@@ -1,95 +1,125 @@
 ---
 import { defineAction } from 'astro:actions';
 import { z } from 'astro/zod';
-
 import Layout from '../layouts/Layout.astro';
-
 import { Resend } from 'resend';
 
+// 1. Define schema at the top
+const contactSchema = z.object({
+  email: z.string().email(),
+  subject: z.string().min(1),
+  body: z.string().min(1),
+});
+
+// 2. Setup Resend client
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
+// 3. Define action before using getActionResult
 export const actions = {
-  default: defineAction({
-    input: z.object({
-      email: z.string().email(),
-      subject: z.string().min(5),
-      body: z.string().min(10),
-    }),
-    handler: async ({ email, subject, body }) => {      
+  contact: defineAction({
+    input: contactSchema,
+    handler: async ({ email, subject, body }) => {
       try {
-        const { data, error } = await resend.emails.send({
-          from: 'Acme <onboarding@resend.dev>',
-          to: ['your-personal-email@gmail.com'],
-          subject: `New message from ${email}: ${subject}`,
+        const { error } = await resend.emails.send({
+          from: "Your Name <onboarding@resend.dev>",
+          to: "tedenadane@gmail.com",
+          subject: `[Portfolio Contact] ${subject}`,
           text: body,
+          replyTo: email,
         });
 
-        // errors from the Resend API
         if (error) {
-          console.error({ error });
-          return {
-            formErrors: ["Sorry, we couldn't send your message at this time."],
-            fieldErrors: {},
-          };
+          console.error(error);
+          return { success: false, error: "Email failed to send." };
         }
 
-        console.log({ data });
-        // success message
-        return { success: 'Your message has been sent successfully!' };
-
-      } catch (e) {
-        console.error(e);
-        return {
-          formErrors: ["An unexpected error occurred. Please try again."],
-          fieldErrors: {},
-        };
+        return { success: true, message: "Thanks! Your message has been sent." };
+      } catch (err) {
+        console.error(err);
+        return { success: false, error: "Something went wrong." };
       }
     },
   }),
 };
 
-const { form = { success: false, errors: null, data: null } } = Astro.locals
+// 4. Get result AFTER schema + actions are defined
+const result = Astro.getActionResult(actions.contact);
+
+// 5. Extract fieldErrors from ZodError if any
+let fieldErrors: Record<string, string[]> = {};
+if (result?.error instanceof z.ZodError) {
+  fieldErrors = result.error.flatten().fieldErrors as Record<string, string[]>;
+}
 ---
 
 <Layout title="Contact Me">
-	<section class="max-w-2xl mx-auto py-16 px-4">
-		<h1 class="text-4xl font-bold text-center mb-12">Contact Me</h1>
+  <section class="max-w-2xl mx-auto py-16 px-4">
+    <h1 class="text-4xl font-bold text-center mb-12">Contact Me</h1>
 
-		<!-- STEP 2: RENDER THE FORM AND THE RESULTS -->
+    <!-- Success message -->
+    {result?.data?.success && (
+      <div class="p-4 mb-8 bg-green-500/20 text-green-300 rounded-md">
+        <p>{result.data.message}</p>
+      </div>
+    )}
 
-		<!-- Show a success message if the form submission was successful -->
-		{form.success && (
-			<div class="p-4 mb-8 bg-green-500/20 text-green-300 rounded-md">
-				<p>{form.data.success}</p>
-			</div>
-		)}
+    <!-- General error message -->
+    {result?.data?.success === false && (
+      <div class="p-4 mb-8 bg-red-500/20 text-red-300 rounded-md">
+        <p>{result.data.error}</p>
+      </div>
+    )}
 
-		<!--
-            - `data-astro-reload` tells Astro to handle this with client-side routing,
-              preventing a full page flash.
-        -->
-		<form method="POST" data-astro-reload class="grid gap-6">
-			<div>
-				<label for="email" class="block mb-2">Your email</label>
-				<input type="email" name="email" id="email" required class="w-full p-3 rounded-md bg-gray-800 border border-gray-700" />
-				<!-- Show a validation error message for this specific field -->
-				{form.errors?.fieldErrors.email && <p class="text-red-400 mt-2">{form.errors.fieldErrors.email}</p>}
-			</div>
-			<div>
-				<label for="subject" class="block mb-2">Subject</label>
-				<input type="text" name="subject" id="subject" required class="w-full p-3 rounded-md bg-gray-800 border border-gray-700" />
-				{form.errors?.fieldErrors.subject && <p class="text-red-400 mt-2">{form.errors.fieldErrors.subject}</p>}
-			</div>
-			<div>
-				<label for="body" class="block mb-2">Body</label>
-				<textarea name="body" id="body" rows="6" required class="w-full p-3 rounded-md bg-gray-800 border border-gray-700"></textarea>
-				{form.errors?.fieldErrors.body && <p class="text-red-400 mt-2">{form.errors.fieldErrors.body}</p>}
-			</div>
+    <!-- Contact form -->
+    <form method="POST" action={actions.contact} data-astro-reload class="grid gap-6">
+      <div>
+        <label for="email" class="block mb-2">Your email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          required
+          class="w-full p-3 rounded-md bg-gray-800 border border-gray-700"
+        />
+        {fieldErrors.email && (
+          <p class="text-red-400 mt-2">{fieldErrors.email[0]}</p>
+        )}
+      </div>
 
-			<button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md transition-colors">
-				Send
-			</button>
-		</form>
+      <div>
+        <label for="subject" class="block mb-2">Subject</label>
+        <input
+          type="text"
+          name="subject"
+          id="subject"
+          required
+          class="w-full p-3 rounded-md bg-gray-800 border border-gray-700"
+        />
+        {fieldErrors.subject && (
+          <p class="text-red-400 mt-2">{fieldErrors.subject[0]}</p>
+        )}
+      </div>
 
-	</section>
+      <div>
+        <label for="body" class="block mb-2">Body</label>
+        <textarea
+          name="body"
+          id="body"
+          rows="6"
+          required
+          class="w-full p-3 rounded-md bg-gray-800 border border-gray-700"
+        ></textarea>
+        {fieldErrors.body && (
+          <p class="text-red-400 mt-2">{fieldErrors.body[0]}</p>
+        )}
+      </div>
+
+      <button
+        type="submit"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md transition-colors"
+      >
+        Send
+      </button>
+    </form>
+  </section>
 </Layout>
