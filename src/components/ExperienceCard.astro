@@ -20,11 +20,11 @@ function formatDate(date: Date) {
 
 <div class="flex gap-4">
     <div class="flex flex-col items-center">
-        <div class="w-4 h-4 rounded-full border-2 border-brand-teal bg-linen-white">
+        <div class="w-4 h-4 rounded-full border-2 border-brand-teal bg-linen-white dark:bg-brand-teal">
         </div>
-        <div class="flex-grow w-px bg-gray-600"></div>
+        <div class="flex-grow w-px bg-gray-600 dark:bg-linen-white"></div>
     </div>
-    <div class="border  border-light-gray shadow  rounded grow p-4">
+    <div class="border  border-light-gray dark:border-medium-gray shadow  rounded grow p-4">
         <p class="text-sm">
             {formatDate(entry.startDate)} - {entry.endDate ? formatDate(entry.endDate) : 'Present'}
         </p>
@@ -37,7 +37,7 @@ function formatDate(date: Date) {
         {entry.tags && entry.tags.length > 0 && (
             <div class="mt-4 flex flex-wrap gap-2">
                 {entry.tags.map((tag: unknown) => (
-                    <span class="rounded border px-3 py-1">{tag}</span>
+                    <span class="rounded border dark:border-medium-gray px-3 py-1">{tag}</span>
                 ))}
             </div>
         )}
