@@ -1,84 +1,68 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { z } from 'astro/zod'; // Keep z for error handling
-import { actions } from '../actions/email'; // Adjust path if using index.ts
-
-// 4. Get result AFTER schema + actions are defined
-const result = Astro.getActionResult(actions.contact);
-
-// 5. Extract fieldErrors from ZodError if any
-let fieldErrors: Record<string, string[]> = {};
-if (result?.error instanceof z.ZodError) {
-  fieldErrors = result.error.flatten().fieldErrors as Record<string, string[]>;
-}
+import { MapPin, Phone, MoveRight } from 'lucide-svelte';
 ---
 
-<Layout title="Contact Me">
-  <section class="mx-auto w-full grid gap-3 py-16">
-    <h1 class="text-4xl font-bold text-center mb-12">Contact Me</h1>
-
-    {result?.data?.success && (
-      <div class="p-4 mb-8  rounded-md">
-        <p>{result.data.message}</p>
+<Layout>
+  <section class="mx-auto w-full grid gap-3">
+    <div class="grid gap-12 md:grid-cols-2">
+      <div class="flex gap-4 flex-col justify-start">
+        <h1 class="text-3xl font-bold mb-4">Get in touch</h1>
+        <div class="flex flex-col gap-3">
+          <p>Email : tedenadane@gmail.com</a>
+          <p class="flex gap-3">
+            ...or send me a message here 
+            <span class="text-dark-slate dark:text-brand-teal hidden md:inline"> 
+              <MoveRight size={28} strokeWidth={1.5} />
+            </span> 
+          </p>
+        </div>
+        <div class="flex flex-col gap-3">
+          <div class="flex gap-2">
+            <span class="text-dark-slate dark:text-brand-teal">
+              <MapPin strokeWidth={1.5} />
+            </span> 
+            Addis Ababa 
+          </div>
+          <div class="flex gap-2"> 
+            <span class="text-dark-slate dark:text-brand-teal"> 
+              <Phone strokeWidth={1.5} /> 
+            </span> 
+            +251 9097 093 70 
+          </div>
+        </div>
       </div>
-    )}
-
-    {result?.data?.success === false && (
-      <div class="p-4 mb-8 bg-red-500/20 text-red-300 rounded-md">
-        <p>{result.data.error}</p>
-      </div>
-    )}
-
-    <!-- <form method="POST" action={actions.contact} data-astro-reload class="grid gap-6 max-w-2xl mx-auto"> -->
-    <form data-astro-reload class="grid gap-6 max-w-2xl mx-auto">
-      <div>
-        <label for="email" class="block mb-2">Your email</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          required
-          class="w-full p-3 rounded-md border  border-gray-700"
-        />
-        {fieldErrors.email && (
-          <p class="text-red-400 mt-2">{fieldErrors.email[0]}</p>
-        )}
-      </div>
-
-      <div>
-        <label for="subject" class="block mb-2">Subject</label>
-        <input
-          type="text"
-          name="subject"
-          id="subject"
-          required
-          class="w-full p-3 rounded-md border border-gray-700"
-        />
-        {fieldErrors.subject && (
-          <p class="text-red-400 mt-2">{fieldErrors.subject[0]}</p>
-        )}
-      </div>
-
-      <div>
-        <label for="body" class="block mb-2">Body</label>
-        <textarea
-          name="body"
-          id="body"
-          rows="6"
-          required
-          class="w-full p-3 rounded-md border border-gray-700"
-        ></textarea>
-        {fieldErrors.body && (
-          <p class="text-red-400 mt-2">{fieldErrors.body[0]}</p>
-        )}
-      </div>
-
-      <button
-        type="submit"
-        class="bg-profile-green hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md transition-colors"
-      >
-        Send
-      </button>
-    </form>
+      <form class="flex flex-col gap-4">
+        <div class="flex flex-col gap-8">
+          <div class="flex flex-col gap-3">
+            <label for="email" class="sr-only">
+              Your email:
+            </label>
+            <input type="email" id="email" name="email" placeholder="Your email" required class="border border-dark-slate dark:border-medium-gray p-2 rounded"/>
+          </div>
+      
+          <div class="flex flex-col gap-3">
+            <label for="subject" class="sr-only">
+              Subject:
+            </label>
+            <input type="text" id="subject" name="subject" placeholder="Subject" required class="border border-dark-slate dark:border-medium-gray p-2 rounded"/>
+          </div>
+      
+          <div class="flex flex-col gap-3">
+            <label for="body" class="sr-only">
+              Body:
+            </label>
+            <textarea
+            name="body"
+            id="body"
+            rows="6"
+            required
+            placeholder="Your message"
+            class="border border-dark-slate dark:border-medium-gray p-2 rounded"></textarea>
+          </div>
+          <button type="submit" class="py-3 border rounded bg-dark-slate text-linen-white hover:text-brand-teal hover:border-brand-teal dark:hover:border-brand-teal dark:hover:bg-dark-slate dark:bg-brand-teal dark:text-dark-slate">Send message</button>
+        </div>
+      </form>
+    </div>
   </section>
 </Layout>
