@@ -1,46 +1,7 @@
 ---
-import { defineAction } from 'astro:actions';
-import { z } from 'astro/zod';
 import Layout from '../layouts/Layout.astro';
-import { Resend } from 'resend';
-
-// 1. Define schema at the top
-const contactSchema = z.object({
-  email: z.string().email(),
-  subject: z.string().min(1),
-  body: z.string().min(1),
-});
-
-// 2. Setup Resend client
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
-
-// 3. Define action before using getActionResult
-export const actions = {
-  contact: defineAction({
-    input: contactSchema,
-    handler: async ({ email, subject, body }) => {
-      try {
-        const { error } = await resend.emails.send({
-          from: "Your Name <onboarding@resend.dev>",
-          to: "tedenadane@gmail.com",
-          subject: `[Portfolio Contact] ${subject}`,
-          text: body,
-          replyTo: email,
-        });
-
-        if (error) {
-          console.error(error);
-          return { success: false, error: "Email failed to send." };
-        }
-
-        return { success: true, message: "Thanks! Your message has been sent." };
-      } catch (err) {
-        console.error(err);
-        return { success: false, error: "Something went wrong." };
-      }
-    },
-  }),
-};
+import { z } from 'astro/zod'; // Keep z for error handling
+import { actions } from '../actions/email'; // Adjust path if using index.ts
 
 // 4. Get result AFTER schema + actions are defined
 const result = Astro.getActionResult(actions.contact);
@@ -53,25 +14,23 @@ if (result?.error instanceof z.ZodError) {
 ---
 
 <Layout title="Contact Me">
-  <section class="max-w-2xl mx-auto py-16 px-4">
+  <section class="mx-auto w-full grid gap-3 py-16">
     <h1 class="text-4xl font-bold text-center mb-12">Contact Me</h1>
 
-    <!-- Success message -->
     {result?.data?.success && (
-      <div class="p-4 mb-8 bg-green-500/20 text-green-300 rounded-md">
+      <div class="p-4 mb-8  rounded-md">
         <p>{result.data.message}</p>
       </div>
     )}
 
-    <!-- General error message -->
     {result?.data?.success === false && (
       <div class="p-4 mb-8 bg-red-500/20 text-red-300 rounded-md">
         <p>{result.data.error}</p>
       </div>
     )}
 
-    <!-- Contact form -->
-    <form method="POST" action={actions.contact} data-astro-reload class="grid gap-6">
+    <!-- <form method="POST" action={actions.contact} data-astro-reload class="grid gap-6 max-w-2xl mx-auto"> -->
+    <form data-astro-reload class="grid gap-6 max-w-2xl mx-auto">
       <div>
         <label for="email" class="block mb-2">Your email</label>
         <input
@@ -79,7 +38,7 @@ if (result?.error instanceof z.ZodError) {
           name="email"
           id="email"
           required
-          class="w-full p-3 rounded-md bg-gray-800 border border-gray-700"
+          class="w-full p-3 rounded-md border  border-gray-700"
         />
         {fieldErrors.email && (
           <p class="text-red-400 mt-2">{fieldErrors.email[0]}</p>
@@ -93,7 +52,7 @@ if (result?.error instanceof z.ZodError) {
           name="subject"
           id="subject"
           required
-          class="w-full p-3 rounded-md bg-gray-800 border border-gray-700"
+          class="w-full p-3 rounded-md border border-gray-700"
         />
         {fieldErrors.subject && (
           <p class="text-red-400 mt-2">{fieldErrors.subject[0]}</p>
@@ -107,7 +66,7 @@ if (result?.error instanceof z.ZodError) {
           id="body"
           rows="6"
           required
-          class="w-full p-3 rounded-md bg-gray-800 border border-gray-700"
+          class="w-full p-3 rounded-md border border-gray-700"
         ></textarea>
         {fieldErrors.body && (
           <p class="text-red-400 mt-2">{fieldErrors.body[0]}</p>
@@ -116,7 +75,7 @@ if (result?.error instanceof z.ZodError) {
 
       <button
         type="submit"
-        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md transition-colors"
+        class="bg-profile-green hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md transition-colors"
       >
         Send
       </button>
