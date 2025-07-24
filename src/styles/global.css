@@ -18,3 +18,8 @@
   --color-brand-teal: hsl(168, 72%, 54%);
   --color-profile-green: hsl(84, 79%, 60%);
 }
+@layer components {
+  a.active {
+    @apply border-b-2 border-brand-teal;
+  }
+}

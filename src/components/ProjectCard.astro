@@ -9,7 +9,7 @@ interface Props {
 const { repo } = Astro.props;
 ---
 
-<a href={repo.html_url} target="_blank" rel="noopener noreferrer" class="block p-3 border border-gray-700 rounded-lg hover:border-blue-500 transition-colors">
+<a href={repo.html_url} target="_blank" rel="noopener noreferrer" class="block p-3 border border-dark-steal rounded-lg hover:border-brand-teal transition-colors">
     <div class="flex items-center gap-3 mb-2">
         <BookMarked strokeWidth={1.5} />
         <h3 class="text-xl font-bold">{repo.name}</h3>

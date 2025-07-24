@@ -8,22 +8,15 @@ import type { SKILLS_DATA } from '../lib/skills';
 
 const { skill } = Astro.props;
 
-// Create a style string. If a color is provided in the data,
-// we'll set the CSS `color` and `border-color` properties.
-// Otherwise, the string will be empty and the default styles will apply.
 const styles = skill.color 
     ? `color: ${skill.color}; border-color: ${skill.color};` 
     : '';
 ---
 
 <div
-    class="flex items-center gap-2 px-4 py-2 rounded-md border transition-all hover:bg-gray-800"
+    class="flex items-center gap-2 px-4 py-2 rounded-md border border-medium-gray transition-all hover:bg-light-gray"
     
 >
-    <!-- 
-        This Icon component now inherits its color from the parent div's `color` style.
-        We also add a fallback for monochrome icons to ensure they are visible in dark mode.
-    -->
     {skill.icon && (
         <Icon name={skill.icon} style={styles} class:list={["w-5 h-5", { 'invert': skill.color === '#000000' || skill.color === '#181717' }]} />
     )}
