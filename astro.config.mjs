@@ -1,10 +1,11 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import tailwindcss from "@tailwindcss/vite";
 
 import svelte from "@astrojs/svelte";
 
 import icon from "astro-icon";
+
+import tailwindcss from "@tailwindcss/vite";
 
 // import icon from "astro-icon";
 

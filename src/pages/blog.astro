@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlogPostPreview from '../components/BlogPostPreview.astro';
+import { getDevToPosts } from '../lib/posts';
+
+// Fetch all posts at build time
+const posts = await getDevToPosts();
+---
+
+<Layout title="My Blog">
+    <section class="py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl font-bold mb-4">Read My Latest Posts</h1>
+            <p class="text-gray-400 mb-12">
+                Thoughts on web development, design, and everything in between, published on dev.to.
+            </p>
+        </div>
+
+        <div class="max-w-3xl mx-auto grid grid-cols-1 gap-12">
+            <!-- Loop over the sorted list of posts -->
+            {posts.length > 0 ? (
+                posts.map(post => <BlogPostPreview post={post} />)
+            ) : (
+                <p class="text-center text-gray-500">No posts found.</p>
+            )}
+        </div>
+    </section>
+</Layout>
