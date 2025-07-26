@@ -1,28 +1,32 @@
 ---
 import { Image } from 'astro:assets';
-import avatarImage from '../assets/potrait.png';
-import { Twitter, Linkedin, Github } from 'lucide-svelte';
+import avatarImage from '../assets/potrait.webp';
+import { Twitter, Linkedin, Github, MapPin } from 'lucide-svelte';
 ---
 
-<div class="flex flex-col md:flex-row gap-3 md:gap-10">
-    <div class="grid items-center">
+<div class="flex flex-col md:flex-row gap-2 md:gap-10">
+    <div class="grid items-center justify-center">
         <Image
             src={avatarImage}
             alt="Potrait Image"
-            width={150}
-            height={150}
+            width={600}
+            height={600}
             format="webp"
             quality={100}
-            class="rounded-full w-32 h-32 md:w-48 md:h-48 object-cover"
+            class="object-cover rounded-lg mx-auto"
             loading="eager"
             fetchpriority="high"
         />
     </div>
-    <div class="grid flex-wrap items-center content-center grow justify-start justify-items-start gap-3">
-        <h1 class="text-3xl text-dark-slate dark:text-linen-white">Temesgen Adane</h1>
-        <p>Frontend Developer</p>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum maxime repudiandae aspernatur eligendi minima eaque reprehenderit ad impedit iste nemo doloremque possimus, nobis delectus blanditiis quos, harum beatae reiciendis nisi quo minus velit voluptatem soluta quis mollitia. Corporis, sit. Et.</p>
-        <p>📌Addis Ababa</p>
+    <div class="grid flex-wrap items-center content-center grow justify-start justify-items-start gap-4">
+        <div class="flex flex-col gap-1">
+            <h1 class="text-3xl text-dark-slate dark:text-linen-white">Temesgen Adane</h1>
+            <p class="text-medium-gray">Frontend Developer</p>
+        </div>
+        <div class="flex flex-col gap-1">
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum maxime repudiandae aspernatur eligendi minima eaque reprehenderit ad impedit iste nemo doloremque possimus, nobis delectus blanditiis quos, harum beatae reiciendis nisi quo minus velit voluptatem soluta quis mollitia. Corporis, sit. Et.</p>
+            <p class="flex gap-1 text-medium-gray"><MapPin strokeWidth={1.25} />Addis Ababa</p>
+        </div>
         <div class="flex gap-4">
             <a class="p-2 border rounded hover:bg-light-gray dark:border-light-gray dark:hover:bg-transparent dark:hover:border-brand-teal dark:hover:text-brand-teal" href="https://x.com/BeshowOnCode"> 
                 <Twitter strokeWidth={1} />
