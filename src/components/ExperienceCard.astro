@@ -1,18 +1,13 @@
 ---
-// Step 1: Import the types for type-safety.
-// `CollectionEntry` is Astro's type for an item from a content collection.
 import type { CollectionEntry } from 'astro:content';
 
-// Step 2: Define the props the component expects.
-// We expect one prop named 'entry' which will be one of our 'work' items.
 interface Props {
 	entry: CollectionEntry<'work'>['data'];
 }
 
-// Step 3: Get the prop passed down from the parent page.
 const { entry } = Astro.props;
 
-// Helper function to format dates nicely.
+// Format dates
 function formatDate(date: Date) {
     return new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(date);
 }
@@ -37,7 +32,7 @@ function formatDate(date: Date) {
         {entry.tags && entry.tags.length > 0 && (
             <div class="mt-4 flex flex-wrap gap-2">
                 {entry.tags.map((tag: unknown) => (
-                    <span class="rounded border dark:border-medium-gray px-3 py-1">{tag}</span>
+                    <span class="rounded border border-dark-slate/20 dark:border-medium-gray/20 px-3 py-1">{tag}</span>
                 ))}
             </div>
         )}

@@ -31,7 +31,7 @@
 	}
 </script>
 
-<button onclick={toggleTheme} class="flex items-center dark:text-brand-teal dark:border-medium-gray p-3 border rounded hover:bg-dark-slate/10   " aria-label="Toggle theme">
+<button onclick={toggleTheme} class="flex items-center dark:text-brand-teal dark:border-medium-gray/30 dark:hover:border-brand-teal p-3 border border-dark-slate/30 rounded hover:bg-dark-slate/10   " aria-label="Toggle theme">
 	{#if theme === 'dark'}
 		<Sun color="currentColor" />
 	{:else}
