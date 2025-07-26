@@ -14,9 +14,9 @@ export const SKILLS_DATA: SkillCategory[] = [
   {
     category: "Frontend Libraries and Frameworks",
     skills: [
-      { name: "React", icon: "simple-icons:react", color: "#61DAFB" },
       { name: "Svelte", icon: "simple-icons:svelte", color: "#FF3E00" },
       { name: "Astro", icon: "simple-icons:astro", color: "#FF5D01" },
+      { name: "React", icon: "simple-icons:react", color: "#61DAFB" },
     ],
   },
   {
