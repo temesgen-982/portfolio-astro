@@ -1,10 +1,22 @@
 ---
+import { Image } from 'astro:assets';
+import avatarImage from '../assets/potrait.png';
 import { Twitter, Linkedin, Github } from 'lucide-svelte';
 ---
 
 <div class="flex flex-col md:flex-row gap-3 md:gap-10">
     <div class="grid items-center">
-        <img src="/potrait.png" class="rounded-lg max-w-[150px] ml-auto" alt="potrait picture">
+        <Image
+            src={avatarImage}
+            alt="Potrait Image"
+            width={150}
+            height={150}
+            format="webp"
+            quality={100}
+            class="rounded-full w-32 h-32 md:w-48 md:h-48 object-cover"
+            loading="eager"
+            fetchpriority="high"
+        />
     </div>
     <div class="grid flex-wrap items-center content-center grow justify-start justify-items-start gap-3">
         <h1 class="text-3xl text-dark-slate dark:text-linen-white">Temesgen Adane</h1>
