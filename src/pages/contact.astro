@@ -1,6 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { MapPin, Phone, MoveRight } from 'lucide-svelte';
+import CopyButton from '../components/CopyButton.svelte';
+
+const email = "tedenadane@gmail.com"
 ---
 
 <Layout>
@@ -9,7 +12,11 @@ import { MapPin, Phone, MoveRight } from 'lucide-svelte';
       <div class="flex gap-4 flex-col justify-start">
         <h1 class="text-3xl font-bold mb-4">Get in touch</h1>
         <div class="flex flex-col gap-3">
-          <p>Email : tedenadane@gmail.com</a>
+          <p>
+            Email : 
+            <a href={`mailto:${email}`} class="underline">{email}</a>
+            <CopyButton text={email} client:load />
+          </p>
           <p class="flex gap-3">
             ...or send me a message here 
             <span class="text-dark-slate dark:text-brand-teal hidden md:inline"> 
