@@ -1,11 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 import avatarImage from '../assets/potrait.webp';
-import { Twitter, Linkedin, Github, MapPin } from 'lucide-svelte';
+import { Twitter, Linkedin, Github, MapPin, Mail } from 'lucide-svelte';
 ---
 
-<div class="flex flex-col md:flex-row gap-2 md:gap-10">
-    <div class="grid items-center justify-center">
+<div class="flex flex-col md:flex-row gap-10 md:gap-10">
+    <div class="grid items-center justify-right">
         <Image
             src={avatarImage}
             alt="Potrait Image"
@@ -13,18 +13,18 @@ import { Twitter, Linkedin, Github, MapPin } from 'lucide-svelte';
             height={600}
             format="webp"
             quality={100}
-            class="object-cover rounded-lg mx-auto"
+            class="object-cover rounded-lg ml-auto w-35 h-35 md:w-100 md:h-40"
             loading="eager"
             fetchpriority="high"
         />
     </div>
-    <div class="grid flex-wrap items-center content-center grow justify-start justify-items-start gap-4">
-        <div class="flex flex-col gap-1">
+    <div class="grid flex-wrap items-center content-center grow justify-start justify-items-start gap-3">
+        <div class="flex flex-col gap-2">
             <h1 class="text-3xl text-dark-slate dark:text-linen-white">Temesgen Adane</h1>
             <p class="text-medium-gray">Frontend Developer</p>
         </div>
-        <div class="flex flex-col gap-1">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum maxime repudiandae aspernatur eligendi minima eaque reprehenderit ad impedit iste nemo doloremque possimus, nobis delectus blanditiis quos, harum beatae reiciendis nisi quo minus velit voluptatem soluta quis mollitia. Corporis, sit. Et.</p>
+        <div class="flex flex-col gap-2">
+            <p>I build intuitive, clean interfaces with depth and soul. From Astro builds to Svelte experiments and React applications, I code with clarity and character—refining every detail until it feels true. Always iterating, always evolving—my work isn’t just functional; it’s thoughtful and adaptable.</p>
             <p class="flex gap-1 text-medium-gray"><MapPin strokeWidth={1.25} />Addis Ababa</p>
         </div>
         <div class="flex gap-4">
@@ -36,6 +36,10 @@ import { Twitter, Linkedin, Github, MapPin } from 'lucide-svelte';
             </a>
             <a class="p-2 border rounded hover:bg-light-gray dark:border-light-gray dark:hover:bg-transparent dark:hover:border-brand-teal dark:hover:text-brand-teal" href="https://github.com/temesgen-982"> 
                 <Github strokeWidth={1} />
+            </a>
+            <a href="mailto:tedenadane@gmail.com" class="flex gap-2 p-2 items-center border rounded dark:bg-brand-teal/5 hover:bg-light-gray dark:hover:bg-brand-teal/5 dark:border-brand-teal dark:hover:text-brand-teal"> 
+                <Mail strokeWidth={1.25} />
+                Email me
             </a>
         </div>
     </div>
