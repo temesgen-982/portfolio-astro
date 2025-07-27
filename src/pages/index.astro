@@ -5,20 +5,30 @@ import Layout from '../layouts/Layout.astro';
 
 import Hero from '../components/Hero.astro';
 import ExperienceCard from '../components/ExperienceCard.astro';
+import EducationCard from '../components/EducationCard.astro';
 import SkillsSection from '../components/SkillsSection.astro';
 
 const WorkExperienceEntries = await getCollection('work');
+const EducationEntries = await getCollection('education');
 
-// 2. PREPARE THE DATA: Create a new array that includes the rendered content.
-//    We use Promise.all to handle the async `job.render()` for all entries.
 const workExperience = await Promise.all(
     WorkExperienceEntries.map(async (job:CollectionEntry<'work'>) => {
         const { Content } = await job.render();
         return {
-            ...job, // Keep all the original job properties like slug, data, etc.
-            Content, // Add the rendered Content component to the object
+            ...job, // job properties like slug, data, etc.
+            Content, // rendered Content component
         };
     })
+);
+
+const educationEntry = await Promise.all(
+	EducationEntries.map(async (education:CollectionEntry<'education'>) => {
+		const { Content } = await education.render();
+		return{
+			...education,
+			Content,
+		};
+	})
 );
 ---
 
@@ -31,6 +41,16 @@ const workExperience = await Promise.all(
         		<ExperienceCard entry={job.data}>
 					<job.Content />
         		</ExperienceCard>
+    		))}
+		</div>
+	</section>
+	<section>
+		<h2 class="text-2xl mb-4 dark:text-linen-white">Education</h2>
+		<div class="grid gap-6">
+			{educationEntry.map((education) => (
+        		<EducationCard entry={education.data}>
+					<education.Content />
+        		</EducationCard>
     		))}
 		</div>
 	</section>

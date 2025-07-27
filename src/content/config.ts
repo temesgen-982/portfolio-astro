@@ -2,7 +2,7 @@ import { z, defineCollection } from "astro:content";
 
 // schema for the "work" collection
 const workCollection = defineCollection({
-  type: "content", // or 'data'
+  type: "content",
   schema: z.object({
     company: z.string(),
     role: z.string(),
@@ -17,7 +17,13 @@ const workCollection = defineCollection({
 // schema for the "education" collection
 const educationCollection = defineCollection({
   type: "content",
-  schema: z.object({}),
+  schema: z.object({
+    school: z.string(),
+    degree: z.string(),
+    location: z.string(),
+    startDate: z.date(),
+    endDate: z.date().optional(),
+  }),
 });
 
 export const collections = {
