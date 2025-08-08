@@ -1,6 +1,6 @@
 ---
 import type { DevToPost } from '../lib/posts';
-import { Icon } from 'astro-icon/components';
+import { Heart } from 'lucide-svelte';
 
 interface Props {
     post: DevToPost;
@@ -17,7 +17,7 @@ const { post } = Astro.props;
             {new Date(post.published_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
         </span>
         <span class="flex items-center gap-1.5">
-            <Icon name="simple-icons:heart" class="w-4 h-4" />
+            <Heart strokeWidth={1.25} />
             {post.public_reactions_count}
         </span>
     </p>
