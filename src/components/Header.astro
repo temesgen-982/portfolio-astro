@@ -1,15 +1,16 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
+const { currentUrl } = Astro.props;
 ---
 
 <header class="flex gap-2 md:gap-3">
     <nav class="flex justify-between border border-dark-slate/30 rounded dark:border-medium-gray/30 p-3 grow">
-        <a href="/" class="active">Home</a>
-        <ul class="flex gap-4">
-        <li><a href="/projects" class="hover:border-b hover:border-brand-teal">Projects</a></li>
-        <li><a href="/blog" class="hover:border-b hover:border-brand-teal">Blog</a></li>
-        <li><a href="/contact" class="hover:border-b hover:border-brand-teal">Contact</a></li>
-        </ul>
+      <a href="/" class={`nav-link ${currentUrl === '/' ? 'active' : ''}`}>Home</a>
+      <ul class="flex gap-4">
+        <li><a href="/projects" class={`nav-link ${currentUrl === '/projects' ? 'active' : ''}`}>Projects</a></li>
+        <li><a href="/blog" class={`nav-link ${currentUrl === '/blog' ? 'active' : ''}`}>Blog</a></li>
+        <li><a href="/contact" class={`nav-link ${currentUrl === '/contact' ? 'active' : ''}`}>Contact</a></li>
+      </ul>  
     </nav>
     <ThemeToggle client:load />
 </header>

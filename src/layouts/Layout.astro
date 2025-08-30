@@ -36,7 +36,7 @@ import Footer from '../components/Footer.astro';
 	</head>
 	<body class="bg-linen-white text-dark-slate dark:bg-dark-slate dark:text-linen-white">
 		<main class="max-w-3xl min-h-screen mx-auto grid grid-rows-[auto_1fr_auto] gap-15 py-8 px-2">
-			<Header />
+			<Header currentUrl={Astro.url.pathname}/>
 			<slot />
 			<Footer />
 		</main>
