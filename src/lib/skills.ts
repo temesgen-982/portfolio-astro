@@ -12,7 +12,7 @@ interface SkillCategory {
 
 export const SKILLS_DATA: SkillCategory[] = [
   {
-    category: "Frontend Libraries and Frameworks",
+    category: "Frontend",
     skills: [
       { name: "Svelte", icon: "simple-icons:svelte", color: "#FF3E00" },
       { name: "Astro", icon: "simple-icons:astro", color: "#FF5D01" },
@@ -20,13 +20,13 @@ export const SKILLS_DATA: SkillCategory[] = [
     ],
   },
   {
-    category: "Backend Frameworks",
+    category: "Backend",
     skills: [
       { name: "Node.js", icon: "simple-icons:nodedotjs", color: "#5FA04E" },
     ],
   },
   {
-    category: "Database Technologies",
+    category: "Database",
     skills: [
       { name: "PostgreSQL", icon: "simple-icons:postgresql", color: "#4169E1" },
     ],
