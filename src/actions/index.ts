@@ -24,7 +24,7 @@ export const server = {
 
       const { data, error } = await resend.emails.send({
         from: "Your Name <onboarding@resend.dev>",
-        to: ["delivered@resend.dev"],
+        to: ["tedenadane@gmail.com"],
         subject: `[Portfolio Contact] ${subject}`,
         text: body,
         replyTo: email,
