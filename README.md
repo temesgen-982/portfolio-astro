@@ -2,20 +2,6 @@
 
 A modern, fast, and fully customizable developer portfolio built with [Astro](https://astro.build/), [Svelte](https://svelte.dev/), and [Tailwind CSS](https://tailwindcss.com/).
 
-## ✨ Features
-
-- **Astro** for static site generation and fast performance
-- **Svelte** components for interactivity (e.g., theme toggle)
-- **Tailwind CSS** for styling and responsive design
-- **Dynamic content**:
-  - Work experience and education via Astro Content Collections
-  - Projects fetched from GitHub using Octokit
-  - Blog posts fetched from Dev.to API
-- **Contact form** with validation (Zod) and email sending via Resend
-- **Dark mode** toggle
-- **Icon support** via astro-icon and lucide-svelte
-- **TypeScript** for type safety
-
 ## 🛠️ Technologies Used
 
 - Astro
@@ -29,15 +15,11 @@ A modern, fast, and fully customizable developer portfolio built with [Astro](ht
 
 ## 🚀 Getting Started
 
-### Prerequisites
-- Node.js (v18+ recommended)
-- npm
-
 ### Installation
 ```bash
 git clone https://github.com/temesgen-982/portfolio-astro.git
 cd portfolio-astro
-npm install
+pnpm install
 ```
 
 ### Environment Variables
@@ -52,7 +34,7 @@ RESEND_API_KEY=your_resend_api_key
 
 ### Development
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ### Build
@@ -92,7 +74,3 @@ npm run preview
 ## ☁️ Deployment
 
 This project is ready to deploy on platforms like **Vercel** or **Netlify**.
-
-## 📄 License
-
-MIT
