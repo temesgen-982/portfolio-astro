@@ -41,7 +41,7 @@ export const SKILLS_DATA: SkillCategory[] = [
   {
     category: "CI/CD",
     skills: [
-      { name: "GitHub Actions", icon: "simple-icons:github", color: "#181717" }
+      { name: "GitHub Actions", icon: "simple-icons:githubactions", color: "#181717" }
     ]
   }
 ];
