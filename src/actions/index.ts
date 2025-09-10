@@ -15,6 +15,7 @@ const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
 export const server = {
   contact: defineAction({
+    accept: "form",
     input: contactSchema,
     handler: async ({ email, subject, body, honeypot }) => {
       if (honeypot) {
