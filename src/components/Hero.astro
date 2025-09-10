@@ -27,7 +27,8 @@ import { Twitter, Linkedin, Github, MapPin, Mail, FileDown } from 'lucide-svelte
             <p>I craft clean UIs with depth and soul. From my early C++ beginnings to flirting with Java,and ghosting PHP, I’ve landed in a committed relationship with Tailwind and found a deep love for SvelteKit. Always iterating, always evolving - my work is not just functional; it is thoughtful and adaptable. </p>
             <p class="flex gap-1 text-medium-gray"><MapPin strokeWidth={1.25} />Addis Ababa</p>
         </div>
-        <div class="flex gap-4">
+    <div class="flex gap-4">
+      <div class="social-link-container">
             <a class="social-link" href="https://x.com/BeshowOnCode" target="_blank"> 
                 <Twitter strokeWidth={1} />
             </a> 
@@ -37,13 +38,14 @@ import { Twitter, Linkedin, Github, MapPin, Mail, FileDown } from 'lucide-svelte
             <a class="social-link" href="https://github.com/temesgen-982" target="_blank"> 
                 <Github strokeWidth={1} />
             </a>
+      </div>
+            <a href="https://drive.google.com/file/d/1LsWTFGL3IX_I-xJBaGNBgYxkmLm6l9-x/view?usp=sharing" target="_blank" class="social-link-container social-link"> 
+                <FileDown strokeWidth={1.25} />
+                <span class="text-dark-slate dark:text-linen-white">Resume</span>
+            </a>
             <a href="mailto:tedenadane@gmail.com" class="flex gap-2 p-2 items-center border border-dark-slate/50 rounded hover:text-brand-teal dark:bg-brand-teal/5 bg-light-gray dark:hover:bg-brand-teal/5 dark:border-brand-teal dark:hover:text-brand-teal"> 
                 <Mail strokeWidth={1.25} />
                 <span class="text-dark-slate dark:text-linen-white">Email</span>
-            </a>
-            <a href="https://drive.google.com/file/d/1LsWTFGL3IX_I-xJBaGNBgYxkmLm6l9-x/view?usp=sharing" target="_blank" class="social-link flex gap-2"> 
-                <FileDown strokeWidth={1.25} />
-                <span class="text-dark-slate dark:text-linen-white">Resume</span>
             </a>
         </div>
     </div>

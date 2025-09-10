@@ -22,8 +22,11 @@
   a.active {
     @apply border-b-2 border-brand-teal;
   }
+  .social-link-container{
+    @apply flex items-center rounded gap-1 border border-dark-slate/30 dark:border-light-gray/30 hover:bg-light-gray dark:hover:bg-transparent dark:hover:border-brand-teal; 
+  }
   a.social-link {
-    @apply p-2 border border-dark-slate/30 rounded hover:bg-light-gray dark:border-light-gray/30 dark:hover:bg-transparent dark:hover:border-brand-teal dark:hover:text-brand-teal;
+    @apply p-2 dark:hover:text-brand-teal hover:text-brand-teal;
   }
   .tab.active{
     @apply text-dark-slate dark:text-brand-teal;
