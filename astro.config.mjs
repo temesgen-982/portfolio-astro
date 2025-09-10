@@ -7,6 +7,8 @@ import icon from "astro-icon";
 
 import tailwindcss from "@tailwindcss/vite";
 
+import vercel from "@astrojs/vercel";
+
 // import icon from "astro-icon";
 
 export default defineConfig({
@@ -15,4 +17,5 @@ export default defineConfig({
   },
 
   integrations: [svelte(), icon({})],
+  adapter: vercel(),
 });
