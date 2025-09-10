@@ -29,6 +29,7 @@ export const SKILLS_DATA: SkillCategory[] = [
     category: "Database",
     skills: [
       { name: "PostgreSQL", icon: "simple-icons:postgresql", color: "#4169E1" },
+      { name: "Supabase", icon: "simple-icons:supabase", color: "#3ecf8e" },
     ],
   },
   {
