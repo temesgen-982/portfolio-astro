@@ -39,37 +39,97 @@ const email = "tedenadane@gmail.com"
           </div>
         </div>
       </div>
-      <form class="flex flex-col gap-4">
+<form id="contact-form" class="flex flex-col gap-4">
         <div class="flex flex-col gap-8">
           <div class="flex flex-col gap-3">
-            <label for="email" class="sr-only">
-              Your email:
-            </label>
-            <input type="email" id="email" name="email" placeholder="Your email" required class="border border-dark-slate dark:border-medium-gray p-2 rounded"/>
+            <label for="email" class="sr-only">Your email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Your email"
+              required
+              class="border border-dark-slate dark:border-medium-gray p-2 rounded"
+            />
           </div>
-      
           <div class="flex flex-col gap-3">
-            <label for="subject" class="sr-only">
-              Subject:
-            </label>
-            <input type="text" id="subject" name="subject" placeholder="Subject" required class="border border-dark-slate dark:border-medium-gray p-2 rounded"/>
+            <label for="subject" class="sr-only">Subject:</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="Subject"
+              required
+              class="border border-dark-slate dark:border-medium-gray p-2 rounded"
+            />
           </div>
-      
           <div class="flex flex-col gap-3">
-            <label for="body" class="sr-only">
-              Body:
-            </label>
+            <label for="body" class="sr-only">Body:</label>
             <textarea
-            name="body"
-            id="body"
-            rows="6"
-            required
-            placeholder="Your message"
-            class="border border-dark-slate dark:border-medium-gray p-2 rounded"></textarea>
+              name="body"
+              id="body"
+              rows="6"
+              required
+              placeholder="Your message"
+              class="border border-dark-slate dark:border-medium-gray p-2 rounded"
+            ></textarea>
           </div>
-          <button type="submit" class="py-3 border rounded bg-dark-slate text-linen-white hover:text-brand-teal hover:border-brand-teal dark:hover:border-brand-teal dark:hover:bg-dark-slate dark:bg-brand-teal dark:text-dark-slate">Send message</button>
+          <label class="sr-only">Leave this blank: <input type="text" name="honeypot" /></label>
+          <button
+            type="submit"
+            id="submit-btn"
+            class="py-3 border rounded bg-dark-slate text-linen-white hover:text-brand-teal hover:border-brand-teal dark:hover:border-brand-teal dark:hover:bg-dark-slate dark:bg-brand-teal dark:text-dark-slate"
+          >
+            Send message
+          </button>
+          <div id="result" aria-live="polite" class="text-sm"></div>
         </div>
       </form>
     </div>
   </section>
+
+  <script>
+    import { actions } from 'astro:actions';
+    const form = document.getElementById('contact-form');
+    const result = document.getElementById('result');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      result.textContent = 'Sending...';
+      result.style.color = '';
+
+      try {
+        const formData = new FormData(form);
+        const { data, error } = await actions.contact(formData);
+
+        if (error) {
+          result.textContent = error.message;
+          result.style.color = 'red';
+          // Display field-specific errors if available
+          if (error.cause?.issues) {
+            const errorMessages = error.cause.issues.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ');
+            result.textContent = `Error: ${errorMessages}`;
+          }
+        } else {
+          result.textContent = data.message;
+          result.style.color = 'green';
+          form.reset();
+        }
+      } catch (err) {
+        result.textContent = 'Error: Something went wrong';
+        result.style.color = 'red';
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+
+  <style>
+    #result {
+      margin-top: 0.5rem;
+      font-weight: bold;
+    }
+  </style>
 </Layout>
