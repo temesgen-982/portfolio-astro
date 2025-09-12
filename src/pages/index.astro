@@ -15,8 +15,8 @@ const workExperience = await Promise.all(
     WorkExperienceEntries.map(async (job:CollectionEntry<'work'>) => {
         const { Content } = await job.render();
         return {
-            ...job, // job properties like slug, data, etc.
-            Content, // rendered Content component
+            ...job,
+            Content,
         };
     })
 );
