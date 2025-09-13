@@ -1,0 +1,135 @@
+<div class="beams-container border dark:border-0 dark:border-t border-dark-slate dark:border-light-gray/10 flex items-center justify-center relative w-full max-w-3xl py-[5rem] overflow-hidden z-0" id="beams-component">
+    <div class="beams-background absolute inset-0 z-[1]"></div>
+    <div class="collision-bar absolute bottom-0 left-0 w-full h-2.5 bg-dark-slate shadow-[0_0_24px_rgba(34,42,53,0.06),0_1px_1px_rgba(0,0,0,0.05),0_0_0_1px_rgba(34,42,53,0.04),0_0_4px_rgba(34,42,53,0.08),0_16px_68px_rgba(47,48,55,0.05),0_1px_0_rgba(255,255,255,0.1)_inset] pointer-events-none z-[2]"></div>
+    <div class="beams-content relative z-[3] text-black">
+        <slot />
+    </div>
+</div>
+
+<script define:vars={{ componentId: 'beams-component' }} client:load>
+    function initializeBeams(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return; // Guard against missing container
+        const background = container.querySelector('.beams-background');
+        const collisionBar = container.querySelector('.collision-bar');
+        let height = container.offsetHeight;
+        let width = container.offsetWidth;
+
+        const beamConfigs = [
+            { initialX: 10, translateX: 10, duration: 7, repeatDelay: 3, delay: 2, height: 56 },
+            { initialX: 600, translateX: 600, duration: 3, repeatDelay: 3, delay: 4, height: 56 },
+            { initialX: 100, translateX: 100, duration: 7, repeatDelay: 7, height: 24 },
+            { initialX: 400, translateX: 400, duration: 5, repeatDelay: 14, delay: 4, height: 56 },
+            { initialX: 800, translateX: 800, duration: 11, repeatDelay: 2, height: 80 },
+            { initialX: 1000, translateX: 1000, duration: 4, repeatDelay: 2, height: 48 },
+            { initialX: 1200, translateX: 1200, duration: 6, repeatDelay: 4, delay: 2, height: 24 },
+            { initialX: 800, translateX: 800, duration: 11, repeatDelay: 2, height: 80 },
+            { initialX: 1000, translateX: 1000, duration: 4, repeatDelay: 2, height: 48 },
+            { initialX: 1200, translateX: 1200, duration: 6, repeatDelay: 4, delay: 2, height: 24 },
+        ];
+
+        class Beam {
+            constructor(config) {
+                this.element = document.createElement('div');
+                this.element.classList.add('beam', 'absolute', 'w-0.5', 'bg-gradient-to-t', 'from-transparent', 'via-brand-teal', 'to-profile-green', 'opacity-80', 'rounded-full');
+                this.config = config;
+                this.x = config.initialX * (width / 1200); // Scale to container width
+                this.length = config.height;
+                this.element.style.height = this.length + 'px';
+                this.y = -200;
+                this.element.style.left = this.x + 'px';
+                this.element.style.top = this.y + 'px';
+                this.speed = (height + 200 + this.length) / (config.duration * 60);
+                this.delay = config.delay || 0;
+                this.repeatDelay = config.repeatDelay || 0;
+                this.startTime = performance.now() + this.delay * 1000;
+                this.cycleCollisionDetected = false;
+                background.appendChild(this.element);
+            }
+
+            update(currentTime) {
+                if (currentTime < this.startTime) return;
+
+                this.y += this.speed;
+                this.element.style.top = this.y + 'px';
+
+                if (!this.cycleCollisionDetected && this.y + this.length >= height - 10) {
+                    this.explode();
+                    this.cycleCollisionDetected = true;
+                }
+            }
+
+            explode() {
+                this.element.classList.add('exploding', 'animate-explode');
+                
+                const bottomY = height - 10;
+                const centerX = this.x + 1;
+                const numParticles = 20;
+                for (let i = 0; i < numParticles; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle', 'absolute', 'w-1', 'h-1', 'bg-gradient-to-b', 'from-dark-slate', 'to-brand-teal', 'rounded-full');
+                    particle.style.left = centerX + 'px';
+                    particle.style.top = bottomY + 'px';
+                    particle.style.opacity = '1';
+                    background.appendChild(particle);
+
+                    const vx = (Math.random() - 0.5) * 80;
+                    const vy = -(Math.random() * 40 + 10);
+                    const duration = Math.random() * 1.5 + 0.5;
+                    const startTime = performance.now();
+
+                    const animateParticle = (currentTime) => {
+                        const elapsed = (currentTime - startTime) / 1000;
+                        const progress = elapsed / duration;
+                        if (progress >= 1) {
+                            background.removeChild(particle);
+                            return;
+                        }
+
+                        const currentLeft = centerX + vx * progress;
+                        const currentTop = bottomY + vy * progress;
+                        const opacity = 1 - progress;
+                        particle.style.left = currentLeft + 'px';
+                        particle.style.top = currentTop + 'px';
+                        particle.style.opacity = opacity;
+                        requestAnimationFrame(animateParticle);
+                    };
+                    requestAnimationFrame(animateParticle);
+                }
+
+                setTimeout(() => {
+                    this.element.classList.remove('exploding', 'animate-explode');
+                    this.element.style.opacity = '0.8';
+                    this.y = -200;
+                    this.element.style.top = this.y + 'px';
+                    this.cycleCollisionDetected = false;
+                    this.startTime = performance.now() + (this.repeatDelay * 1000);
+                }, 2000);
+            }
+        }
+
+        const beams = beamConfigs.map(config => new Beam(config));
+
+        function animate(currentTime) {
+            beams.forEach(beam => beam.update(currentTime));
+            requestAnimationFrame(animate);
+        }
+
+        requestAnimationFrame(animate);
+
+        window.addEventListener('resize', () => {
+            height = container.offsetHeight;
+            width = container.offsetWidth;
+        });
+    }
+
+    // Initialize the beams component
+    initializeBeams('beams-component');
+</script>
+
+<style>
+    @keyframes explode {
+        0% { transform: scaleY(1); opacity: 0.8; }
+        100% { transform: scaleY(0.5); opacity: 0; }
+    }
+</style>

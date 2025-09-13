@@ -7,6 +7,7 @@ import Hero from '../components/Hero.astro';
 import ExperienceCard from '../components/ExperienceCard.astro';
 import EducationCard from '../components/EducationCard.astro';
 import SkillsSection from '../components/SkillsSection.astro';
+import BeamsContainer from '../components/BeamsContainer.astro';
 
 const profile = await getEntry('profile', 'profile');
 const WorkExperienceEntries = await getCollection('work');
@@ -58,8 +59,10 @@ const educationEntry = await Promise.all(
 		</div>
 	</section>
 	<SkillsSection />
-	<div class="flex flex-col md:flex-row items-center justify-center gap-4 py-[4rem] dark:bg-dark-slate bg-light-gray border rounded">
+  <BeamsContainer>
+	  <div class="flex flex-col md:flex-row items-center justify-center gap-4">
 		<a href="/" class="px-4 py-2 border rounded bg-linen-white dark:bg-dark-slate dark:text-linen-white hover:border-brand-teal hover:text-brand-teal hover:bg-dark-slate">Contact me</a>
 		<a href="/" class="px-4 py-2 border rounded bg-linen-white dark:bg-dark-slate dark:text-linen-white hover:border-brand-teal hover:text-brand-teal hover:bg-dark-slate">Check out my projects</a>
-	</div>
+    </div>
+  </BeamsContainer>
 </Layout>
