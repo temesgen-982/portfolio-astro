@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-
+import {MapPin} from 'lucide-svelte';
 interface Props {
 	entry: CollectionEntry<'work'>['data'];
 }
@@ -24,7 +24,7 @@ function formatDate(date: Date) {
             {formatDate(entry.startDate)} - {entry.endDate ? formatDate(entry.endDate) : 'Present'}
         </p>
         <h2 class="text-xl font-bold">{entry.company}</h2>
-        <p>📌{entry.location}</p>
+        <p class="flex gap-2 items-center"><MapPin strokeWidth={1.5} size={16} />{entry.location}</p>
         <div class="prose prose-invert mt-2 text-medium-gray">
             <slot />
         </div>
