@@ -1,5 +1,5 @@
 ---
-import {getCollection, type CollectionEntry} from 'astro:content';
+import {getCollection, getEntry, type CollectionEntry} from 'astro:content';
 
 import Layout from '../layouts/Layout.astro';
 
@@ -8,8 +8,11 @@ import ExperienceCard from '../components/ExperienceCard.astro';
 import EducationCard from '../components/EducationCard.astro';
 import SkillsSection from '../components/SkillsSection.astro';
 
+const profile = await getEntry('profile', 'profile');
 const WorkExperienceEntries = await getCollection('work');
 const EducationEntries = await getCollection('education');
+
+const { Content: ProfileContent } = await profile.render();
 
 const workExperience = await Promise.all(
     WorkExperienceEntries.map(async (job:CollectionEntry<'work'>) => {
@@ -33,7 +36,7 @@ const educationEntry = await Promise.all(
 ---
 
 <Layout>
-	<Hero />
+  <Hero profileData={profile.data} ProfileContent={ProfileContent} />
 	<section>
 		<h2 class="text-2xl mb-4 dark:text-linen-white">Work Experience</h2>
 		<div class="grid gap-6">

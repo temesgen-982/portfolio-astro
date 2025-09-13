@@ -1,17 +1,20 @@
 import { z, defineCollection } from "astro:content";
 
 // schema for the "profile" structure
-const profileStructure = defineCollection({
+const profileCollection = defineCollection({
   type: "content",
   schema: z.object({
     name: z.string(),
-    role: z.string(),
+    title: z.string(),
     location: z.string(),
-    x: z.string(),
-    github: z.string(),
-    linkedin: z.string(),
-    resume: z.string(),
+    links: z.object({
+      x: z.string().url(),
+      github: z.string().url(),
+      linkedin: z.string().url(),
+      resume: z.string().url(),
+    }),
     email: z.string(),
+
   }),
 });
 
@@ -42,7 +45,7 @@ const educationCollection = defineCollection({
 });
 
 export const collections = {
-  profile: profileStructure,
+  profile: profileCollection,
   work: workCollection,
   education: educationCollection,
 };

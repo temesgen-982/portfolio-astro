@@ -2,6 +2,14 @@
 import { Image } from 'astro:assets';
 import avatarImage from '../assets/potrait.webp';
 import { Twitter, Linkedin, Github, MapPin, Mail, FileDown } from 'lucide-svelte';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	profileData: CollectionEntry<'profile'>['data'];
+  ProfileContent: any;
+}
+
+const { profileData, ProfileContent } = Astro.props;
 ---
 
 <div class="flex flex-col md:flex-row gap-10 md:gap-10">
@@ -13,19 +21,19 @@ import { Twitter, Linkedin, Github, MapPin, Mail, FileDown } from 'lucide-svelte
             height={600}
             format="webp"
             quality={100}
-            class="object-cover rounded-lg ml-auto w-35 h-35 md:w-100 md:h-40"
+            class="object-cover rounded-lg ml-auto w-35 h-35 md:w-100 md:h-45"
             loading="eager"
             fetchpriority="high"
         />
     </div>
     <div class="grid flex-wrap items-center content-center grow justify-start justify-items-start gap-3">
         <div class="flex flex-col gap-2">
-            <h1 class="text-3xl text-dark-slate dark:text-linen-white">Temesgen Adane</h1>
-            <p class="text-medium-gray">Fullstack Developer</p>
+      <h1 class="text-3xl text-dark-slate dark:text-linen-white">{profileData.name}</h1>
+      <p class="text-medium-gray">{profileData.title}</p>
         </div>
-        <div class="flex flex-col gap-2">
-            <p>I craft clean UIs with depth and soul. From my early C++ beginnings to flirting with Java,and ghosting PHP, I’ve landed in a committed relationship with Tailwind and found a deep love for SvelteKit. Always iterating, always evolving - my work is not just functional; it is thoughtful and adaptable. </p>
-            <p class="flex gap-1 text-medium-gray"><MapPin strokeWidth={1.25} />Addis Ababa</p>
+        <div class="flex flex-col gap-2 leading-relaxed">
+            <ProfileContent />
+      <p class="flex items-center gap-1 text-medium-gray"><MapPin strokeWidth={1.25} size={16} />Addis Ababa</p>
         </div>
     <div class="flex gap-4">
       <div class="social-link-container">
