@@ -44,8 +44,22 @@ const educationCollection = defineCollection({
   }),
 });
 
+// schema for the "project" collection
+const projectCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    screenshot: z.string(),
+    livesite: z.string().url().optional(),
+    github: z.string().url().optional(),
+    tags: z.array(z.string()),
+  })
+})
+
 export const collections = {
   profile: profileCollection,
   work: workCollection,
   education: educationCollection,
+  project: projectCollection,
 };
