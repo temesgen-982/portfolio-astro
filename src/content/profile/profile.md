@@ -1,11 +1,12 @@
 ---
 name: "Temesgen Adane"
-role: "Frontend Developer"
+role: "Fullstack Developer"
 location: "Addis Ababa"
-email: "tedenadane@gmail.com"
-twitter: "https://x.com/BeshowOnCode"
-linkedin: "https://www.linkedin.com/in/temesgen-adane-a04823372/"
+x: "https://x.com/temesgen982"
+linkedin: "https://www.linkedin.com/in/temesgen-adane/"
 github: "https://github.com/temesgen-982"
+resume: "https://drive.google.com/file/d/1LsWTFGL3IX_I-xJBaGNBgYxkmLm6l9-x/view?usp=sharing"
+email: "tedenadane@gmail.com"
 ---
-
-I build intuitive, clean interfaces with depth and soul. From Astro builds to Svelte experiments and React applications, I code with clarity and character—refining every detail until it feels true. Always iterating, always evolving—my work isn’t just functional; it’s thoughtful and adaptable.
+I am a 21yo developer who loves to code and make things.
+From architecting robust back-end systems and crafting intuitive user interfaces to overseeing deployment, I enjoy turning complex challenges into fast, reliable, and elegant digital experiences.
