@@ -7,10 +7,11 @@ const profileStructure = defineCollection({
     name: z.string(),
     role: z.string(),
     location: z.string(),
-    email: z.string(),
-    twitter: z.string(),
+    x: z.string(),
     github: z.string(),
     linkedin: z.string(),
+    resume: z.string(),
+    email: z.string(),
   }),
 });
 
