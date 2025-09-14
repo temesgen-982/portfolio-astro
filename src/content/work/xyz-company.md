@@ -1,5 +1,5 @@
 ---
-company: "XYZ Company"
+company: "Abronal technologies"
 role: "Frontend Developer"
 location: "Addis Ababa"
 startDate: 2023-05-20
