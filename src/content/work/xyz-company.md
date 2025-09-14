@@ -1,7 +1,7 @@
 ---
 company: "Abronal technologies"
 role: "Frontend Developer"
-location: "Addis Ababa"
+location: "Hawassa"
 startDate: 2023-05-20
 endDate: 2025-06-08
 tags: ["React", "Git", "Svelte"]
