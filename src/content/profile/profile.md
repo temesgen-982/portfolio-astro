@@ -6,7 +6,7 @@ links:
     x: "https://x.com/temesgen982"
     linkedin: "https://www.linkedin.com/in/temesgen-adane/"
     github: "https://github.com/temesgen-982"
-    resume: "https://drive.google.com/file/d/1PTh7YFH85c1X1-e96gt2dvNLZJ5g9kw4/view?usp=sharing"
+    resume: "https://drive.google.com/file/d/1Z-0wBog0ItZtPu1qMKt99CCHvthM4bMT/view?usp=sharing"
 email: "mailto:tedenadane@gmail.com"
 ---
 I am a 21yo developer who loves to code and make things.<br>
