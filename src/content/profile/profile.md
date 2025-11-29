@@ -10,4 +10,5 @@ links:
 email: "mailto:tedenadane@gmail.com"
 ---
 I am a 21yo developer who loves to code and make things.<br>
-From architecting robust back-end systems and crafting intuitive user interfaces to overseeing deployment, I enjoy turning complex challenges into fast, reliable, and elegant digital experiences.
+I mainly build modern user interfaces to enhance user experience and provide valuable benefits.<br>
+I am currently undertaking my Bachelor's degree at AAU.
