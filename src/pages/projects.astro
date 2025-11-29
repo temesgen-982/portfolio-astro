@@ -1,21 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-// import { getRepos } from '../lib/github';
-import {getCollection, type CollectionEntry} from 'astro:content';
+import { getCollection } from 'astro:content';
 import ProjectCard from '../components/ProjectCard.astro';
 
-// Fetch the data at build time!
-// const allProjects = await getRepos();
-
-const projectEntries = await getCollection('project');
-
-const projectEntry = await Promise.all(
-    projectEntries.map(async (project: CollectionEntry<'project'>) => {
-        return {
-            ...project.data,
-        };
-    })
-);
+const projects = await getCollection('projects');
 ---
 
 <Layout title="Projects">
@@ -27,11 +15,8 @@ const projectEntry = await Promise.all(
             </p>
         </div>
 
-        <div class="max-w-6xl mx-auto grid grid-cols-1 gap-8">
-            <!-- {allProjects.map(project => (
-                <ProjectCard repo={project} />
-            ))} -->
-			    {projectEntry.map((project) => (
+        <div class="max-w-6xl mx-auto grid gap-8">
+			    {projects.map((project) => (
             <ProjectCard entry={project} />
     		  ))}
         </div>

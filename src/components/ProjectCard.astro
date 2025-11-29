@@ -1,72 +1,55 @@
 ---
-// import type { Repo, LanguageStats } from '../lib/github'; // Ensure LanguageStats is imported if it's in the same file as Repo
-// import { Star, BookMarked, Github, ExternalLink } from 'lucide-svelte'; // Added ExternalLink for live site
-
-// interface Props {
-//  repo: Repo;
-// }
-
-// const { repo } = Astro.props;
-
-// Determine if the repo has a live site
-// const isLive = !!repo.homepage?.startsWith('http');
-
-// The main card link points to homepage if live, otherwise GitHub URL
-// const cardLink = isLive ? repo.homepage : repo.html_url;
-
 import type { CollectionEntry } from 'astro:content';
+import { Github, ExternalLink } from 'lucide-svelte';
 
 interface Props {
-	entry: CollectionEntry<'project'>['data'];
+	entry: CollectionEntry<'project'>;
 }
 
 const { entry } = Astro.props;
+const { title, description, screenshot, livesite, github, tags } = entry.data;
 ---
 
-<div class="border border-dark-steal/40 dark:border-medium-gray rounded-lg p-4 bg-light-gray dark:bg-dark-slate hover:shadow-lg transition-shadow duration-200">
-    <div class="flex items-center justify-between gap-3 mb-2">
-        <h3 class="text-xl font-bold">{entry.title}</h3>
-    </div>
-    
-      <!-- <div class="flex items-center justify-between text-sm mt-4"> 
-        <div class="flex items-center gap-2">
-            <a
-              href={repo.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-xs flex items-center gap-1 hover:underline"
-            >
-              <Github strokeWidth={1.5} class="w-4 h-4" />
-              GitHub
-            </a>
-            {isLive && (
-              <a
-                href={repo.homepage}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-xs flex items-center gap-1 hover:underline"
-              >
-                <ExternalLink strokeWidth={1.5} class="w-4 h-4" />
-                Live Site
-              </a>
-            )}
-        </div> 
-    
-        <div class="flex items-center gap-1 ml-auto"> <Star strokeWidth={1.5} class="w-4 h-4"/>
-          <span>{repo.stargazers_count}</span>
-        </div> 
-      </div>
-    
-      {repo.languagePercentages && Object.keys(repo.languagePercentages).length > 0 && (
-        <div class="mt-3 flex flex-wrap gap-2 text-xs">
-          {Object.entries(repo.languagePercentages).map(([lang, percent], index) => (
-            <span class="flex items-center gap-1 px-2 py-1 bg-medium-gray/5 backdrop-blur border-dark-steal rounded-md"> <span class="font-medium">{lang}</span>
-              {/* Only show percentage for the first language */}
-              {index === 0 && (
-                <span class="text-medium-gray ml-1">{percent}%</span>
-              )}
-            </span>
-          ))}
+<div class="group border border-dark-slate/30 dark:border-medium-gray/30 rounded-xl overflow-hidden bg-light-gray/30 dark:bg-dark-slate/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col md:flex-row-reverse h-full">
+    {screenshot && (
+        <div class="aspect-video md:aspect-auto w-full md:w-1/2 overflow-hidden border-b md:border-b-0 md:border-l border-dark-slate/10 dark:border-medium-gray/10">
+            <img 
+                src={screenshot} 
+                alt={`Screenshot of ${title}`} 
+                class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            />
         </div>
-      )} -->
+    )}
+    
+    <div class="p-5 flex flex-col flex-grow w-full md:w-1/2">
+        <div class="flex items-start justify-between gap-3 mb-3">
+            <h3 class="text-xl font-bold text-dark-slate dark:text-linen-white group-hover:text-brand-teal transition-colors">
+                {title}
+            </h3>
+            <div class="flex gap-2 shrink-0">
+                {github && (
+                    <a href={github} target="_blank" rel="noopener noreferrer" class="p-2 rounded-full hover:bg-dark-slate/10 dark:hover:bg-linen-white/10 transition-colors text-dark-slate dark:text-linen-white" aria-label="View Source Code">
+                        <Github size={18} />
+                    </a>
+                )}
+                {livesite && (
+                    <a href={livesite} target="_blank" rel="noopener noreferrer" class="p-2 rounded-full hover:bg-dark-slate/10 dark:hover:bg-linen-white/10 transition-colors text-dark-slate dark:text-linen-white" aria-label="Visit Live Site">
+                        <ExternalLink size={18} />
+                    </a>
+                )}
+            </div>
+        </div>
+        
+        <p class="text-medium-gray text-sm mb-4 line-clamp-3 flex-grow">
+            {description}
+        </p>
+        
+        <div class="flex flex-wrap gap-2 mt-auto">
+            {tags.map(tag => (
+                <span class="px-2 py-1 text-xs font-medium rounded-md bg-brand-teal/10 text-brand-teal border border-brand-teal/20">
+                    {tag}
+                </span>
+            ))}
+        </div>
+    </div>
 </div>
