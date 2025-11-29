@@ -10,6 +10,7 @@
   --color-brand-teal: hsl(168, 72%, 54%);
   --color-profile-green: hsl(84, 79%, 60%);
 }
+
 @theme {
   --color-linen-white: hsl(0, 0%, 97%);
   --color-light-gray: hsl(210, 20%, 92%);
@@ -18,29 +19,20 @@
   --color-brand-teal: hsl(168, 72%, 54%);
   --color-profile-green: hsl(84, 79%, 60%);
 }
+
 @layer components {
-  a.active {
-    @apply border-b-2 border-brand-teal;
+
+  .social-link-container {
+    @apply flex items-center rounded gap-1 border border-dark-slate/30 dark:border-light-gray/30 hover:bg-light-gray dark:hover:bg-transparent dark:hover:border-brand-teal;
   }
-  .social-link-container{
-    @apply flex items-center rounded gap-1 border border-dark-slate/30 dark:border-light-gray/30 hover:bg-light-gray dark:hover:bg-transparent dark:hover:border-brand-teal; 
-  }
+
   a.social-link {
     @apply p-2 dark:hover:text-brand-teal hover:text-brand-teal;
   }
-  .tab.active{
+
+  .tab.active {
     @apply text-dark-slate dark:text-brand-teal;
   }
-  .nav-link {
-    @apply relative pb-2;
-  }
-  .nav-link::after {
-    content: "";
-    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-brand-teal transition-all duration-300;
-  }
-  .nav-link:hover::after,
-  .nav-link.active::after {
-    @apply w-full;
-  }
+
 
 }

@@ -4,12 +4,12 @@ const { currentUrl } = Astro.props;
 ---
 
 <header class="flex gap-2 md:gap-3">
-    <nav class="flex justify-between border border-dark-slate/30 rounded dark:border-medium-gray/30 p-3 grow">
-      <a href="/" class={`nav-link ${currentUrl === '/' ? 'active' : ''}`}>Home</a>
+    <nav class="flex justify-between border border-dark-slate/30 rounded dark:border-medium-gray/30 px-2 py-2 grow">
+      <a href="/" class={`pb-1 border-b-2 transition-colors duration-300 ${currentUrl === '/' ? 'border-brand-teal font-medium' : 'border-transparent hover:border-brand-teal'}`}>Home</a>
       <ul class="flex gap-4">
-        <li><a href="/projects" class={`nav-link ${currentUrl === '/projects' ? 'active' : ''}`}>Projects</a></li>
-        <li><a href="/blog" class={`nav-link ${currentUrl === '/blog' ? 'active' : ''}`}>Blog</a></li>
-        <li><a href="/contact" class={`nav-link ${currentUrl === '/contact' ? 'active' : ''}`}>Contact</a></li>
+        <li><a href="/projects" class={`pb-1 border-b-2 transition-colors duration-300 ${currentUrl === '/projects' ? 'border-brand-teal font-medium' : 'border-transparent hover:border-brand-teal'}`}>Projects</a></li>
+        <li><a href="/blog" class={`pb-1 border-b-2 transition-colors duration-300 ${currentUrl === '/blog' ? 'border-brand-teal font-medium' : 'border-transparent hover:border-brand-teal'}`}>Blog</a></li>
+        <li><a href="/contact" class={`pb-1 border-b-2 transition-colors duration-300 ${currentUrl === '/contact' ? 'border-brand-teal font-medium' : 'border-transparent hover:border-brand-teal'}`}>Contact</a></li>
       </ul>  
     </nav>
     <ThemeToggle client:load />
