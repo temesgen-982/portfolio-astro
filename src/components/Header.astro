@@ -12,5 +12,5 @@ const { currentUrl } = Astro.props;
         <li><a href="/contact" class={`pb-1 border-b-2 transition-colors duration-300 ${currentUrl.startsWith('/contact') ? 'border-brand-teal font-medium' : 'border-transparent hover:border-brand-teal'}`}>Contact</a></li>
       </ul>  
     </nav>
-    <ThemeToggle client:load />
+    <ThemeToggle />
 </header>
