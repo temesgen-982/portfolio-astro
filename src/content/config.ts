@@ -65,6 +65,7 @@ const postsCollection = defineCollection({
     description: z.string(),
     heroImage: z.string().optional(),
     tags: z.array(z.string()).optional(),
+    pubDate: z.date(),
   }),
 });
 
