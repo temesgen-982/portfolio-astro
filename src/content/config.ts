@@ -57,9 +57,22 @@ const projectCollection = defineCollection({
   })
 })
 
+// schema for the "posts" collection
+const postsCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    pubDate: z.date(),
+    description: z.string(),
+    heroImage: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+  }),
+});
+
 export const collections = {
   profile: profileCollection,
   work: workCollection,
   education: educationCollection,
   project: projectCollection,
+  posts: postsCollection,
 };

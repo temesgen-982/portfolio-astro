@@ -1,10 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import BlogPostPreview from '../components/BlogPostPreview.astro';
-import { getDevToPosts } from '../lib/posts';
+import { getCollection } from 'astro:content';
 
 // Fetch all posts at build time
-const posts = await getDevToPosts();
+const posts = (await getCollection('posts')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
 <Layout title="My Blog">
@@ -12,8 +14,9 @@ const posts = await getDevToPosts();
         <div class="max-w-4xl mx-auto text-center">
             <h1 class="text-4xl font-bold mb-4">Read My Latest Posts</h1>
             <p class="text-gray-400 mb-12">
-                Thoughts on web development, design, and everything in between, published on dev.to.
+                Thoughts on web development, life, and everything in between.
             </p>
+
         </div>
 
         <div class="max-w-3xl mx-auto grid grid-cols-1 gap-12">
