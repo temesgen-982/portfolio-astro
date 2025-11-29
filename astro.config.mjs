@@ -9,13 +9,17 @@ import tailwindcss from "@tailwindcss/vite";
 
 import vercel from "@astrojs/vercel";
 
+import sitemap from '@astrojs/sitemap';
+
+import robotsTxt from 'astro-robots-txt';
+
 // import icon from "astro-icon";
 
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-
-  integrations: [svelte(), icon({})],
+  site: 'https://temesgen.vercel.app',
+  integrations: [svelte(), icon({}), sitemap(), robotsTxt()],
   adapter: vercel(),
 });
