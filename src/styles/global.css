@@ -40,7 +40,34 @@
     line-height: 1.75;
   }
 
-  .prose-invert {
+  .dark .prose {
+    color: var(--color-linen-white);
+  }
+
+  .dark .prose h1,
+  .dark .prose h2,
+  .dark .prose h3,
+  .dark .prose h4,
+  .dark .prose h5,
+  .dark .prose h6 {
+    color: var(--color-linen-white);
+  }
+
+  .dark .prose a {
+    color: var(--color-brand-teal);
+  }
+
+  .dark .prose code {
+    background-color: hsl(217, 19%, 25%);
+    color: var(--color-brand-teal);
+  }
+
+  .dark .prose blockquote {
+    color: var(--color-light-gray);
+    border-left-color: var(--color-brand-teal);
+  }
+
+  .dark .prose strong {
     color: var(--color-linen-white);
   }
 
