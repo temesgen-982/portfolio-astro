@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { ArrowLeft } from 'lucide-svelte';
 import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
@@ -16,6 +17,14 @@ const { Content } = await post.render();
 
 <Layout title={post.data.title}>
     <article class="py-12 overflow-hidden">
+        <a 
+            href="/blog" 
+            class="inline-flex items-center gap-2 mb-8 text-gray-400 hover:text-brand-teal transition-colors"
+        >
+            <ArrowLeft size={20} />
+            Back to Blog
+        </a>
+        
         {post.data.heroImage && (
             <div class="mb-8">
                 <img 
