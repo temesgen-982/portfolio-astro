@@ -7,7 +7,7 @@ tags:
   - Typescript
 ---
 
-In this Svelte guide, we will be tackling the classic "Circle Drawer" challenge from the [7 GUIs benchmark](https://eugenkiss.github.io/7guis/tasks). We'll focus on drawing circles and implementing undo/redo—but skip the diameter editing to keep things simple and clean.
+In this Svelte guide, we will be tackling the classic "Circle Drawer" challenge from the [7 GUIs benchmark](https://eugenkiss.github.io/7guis/tasks). We'll focus on drawing circles and implementing undo/redo—but skip the diameter editing to keep things simple.
 
 Here's what we'll build:
 
