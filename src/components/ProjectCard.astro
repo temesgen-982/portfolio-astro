@@ -10,9 +10,9 @@ const { entry } = Astro.props;
 const { title, description, screenshot, livesite, github, tags } = entry.data;
 ---
 
-<div class="group border border-dark-slate/30 dark:border-medium-gray/30 rounded-xl overflow-hidden bg-light-gray/30 dark:bg-dark-slate/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col md:flex-row-reverse h-full">
+<div class="group border border-dark-slate/30 dark:border-medium-gray/30 rounded-l overflow-hidden bg-light-gray/30 dark:bg-dark-slate/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col h-full md:flex-row-reverse">
     {screenshot && (
-        <div class="aspect-video md:aspect-auto w-full md:w-1/2 overflow-hidden border-b md:border-b-0 md:border-l border-dark-slate/10 dark:border-medium-gray/10">
+        <div class="aspect-video md:aspect-auto w-full md:w-2/5 overflow-hidden border-b md:border-b-0 border-dark-slate/10 dark:border-medium-gray/10 md:border-l">
             <img 
                 src={screenshot} 
                 alt={`Screenshot of ${title}`} 
@@ -21,7 +21,7 @@ const { title, description, screenshot, livesite, github, tags } = entry.data;
         </div>
     )}
     
-    <div class="p-5 flex flex-col flex-grow w-full md:w-1/2">
+    <div class="p-5 flex flex-col flex-grow w-full md:w-3/5">
         <div class="flex items-start justify-between gap-3 mb-3">
             <h3 class="text-xl font-bold text-dark-slate dark:text-linen-white group-hover:text-brand-teal transition-colors">
                 {title}
