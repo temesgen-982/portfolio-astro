@@ -6,7 +6,7 @@ import { Twitter, Linkedin, Github } from 'lucide-svelte';
     <div class="border-t border-t-medium-gray py-4 flex items-center justify-between">
         <div>
             <p>Temesgen Adane</p>
-            <p>© 2025</p>
+            <p id="copyright">© <span id="year"></span></p>
         </div>
         <div class="social-link-container">
             <a class="social-link" href="https://x.com/temesgen982" target="_blank"> 
@@ -20,3 +20,7 @@ import { Twitter, Linkedin, Github } from 'lucide-svelte';
             </a>
       </div>    </div>
 </footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear().toString();
+</script>
