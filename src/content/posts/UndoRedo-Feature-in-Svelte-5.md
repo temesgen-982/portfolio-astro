@@ -7,7 +7,7 @@ tags:
   - Typescript
 ---
 
-In this step-by-step guide, we will be tackling the classic "Circle Drawer" challenge from the [7 GUIs benchmark](https://eugenkiss.github.io/7guis/tasks). We'll focus on drawing circles and implementing undo/redo—but skip the diameter editing to keep things simple and clean.
+In this Svelte guide, we will be tackling the classic "Circle Drawer" challenge from the [7 GUIs benchmark](https://eugenkiss.github.io/7guis/tasks). We'll focus on drawing circles and implementing undo/redo—but skip the diameter editing to keep things simple and clean.
 
 Here's what we'll build:
 
@@ -16,12 +16,11 @@ Here's what we'll build:
 Our app will let users:
 
 1. Click to draw circles
-
 2. Undo and redo every action
 
 Let's break it down and build it up.
 
----
+***
 
 ## Getting Started
 
@@ -31,7 +30,7 @@ Alternatively you can set up a [local project](https://svelte.dev/docs/svelte/ge
 
 I'm using Tailwind CSS for styles, but you can use anything you're comfortable with.
 
----
+***
 
 ## Step 1: Defining Our Circle Type
 
@@ -40,9 +39,7 @@ Before we touch any UI, we need to define what kind of data our app is dealing w
 Each circle will have:
 
 * A unique `id`
-
 * An `x` and `y` coordinate
-
 * A fixed `r` (radius) — we'll set it to 25 by default
 
 **File: `src/lib/types.ts`**
@@ -63,7 +60,7 @@ export type Circle = {
 
 ```
 
----
+***
 
 ## Step 2: Storing Circles in State
 
@@ -85,7 +82,7 @@ Now we need somewhere to keep track of our drawn circles. We'll the `$state` [ru
 
 We'll update this later to plug in a history mechanism, but this is a good starting point.
 
----
+***
 
 ## Step 3: Drawing on an SVG Canvas
 
@@ -121,7 +118,7 @@ We'll use `<svg>` to render our circles. SVG is perfect for this challenge becau
 
 Svelte's `{#each}` block will update the DOM automatically whenever the `circles` array changes.
 
----
+***
 
 ## Step 4: Drawing Circles on Click
 
@@ -181,7 +178,7 @@ We also use `bind:this` to reference the DOM node directly.
 
 Now every time you click the canvas, a circle should appear right under your cursor.
 
----
+***
 
 ## Step 5: Undo/Redo
 
@@ -251,7 +248,7 @@ export function createHistory<T>(initialValue: T) {
 
 This generic helper works with **any type of state**, not just circles.
 
----
+***
 
 ## Step 6: Wiring It All Together
 
@@ -321,24 +318,20 @@ We will also wire up our buttons and the `{#each}` block to our new state.
 
 And there we have it! A fully functional, reactive Circle Drawer with a robust undo/redo system. You can click a bunch of times, undo all the way back to zero, and redo them one by one.
 
----
+***
 
 ## Wrap-up
 
 What we built:
 
-- Draw circles with a click
-
-- View all circles with SVG
-
-- Undo and redo any action
-
-- Fully reactive state with Svelte 5 runes
+* Draw circles with a click
+* View all circles with SVG
+* Undo and redo any action
+* Fully reactive state with Svelte 5 runes
 
 This is a great example of how declarative + reactive UI can be powerful *and* minimal. If you want to go further, you could:
 
 * Add diameter editing as per the challenge
-
 * Add keyboard shortcuts for undo/redo
 
 > [Live demo on StackBlitz](https://stackblitz.com/edit/stackblitz-starters-epg116w8?file=src/routes/+page.svelte)
