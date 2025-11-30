@@ -26,7 +26,7 @@ export const server = {
         from: "Your Name <onboarding@resend.dev>",
         to: ["tedenadane@gmail.com"],
         subject: `[Portfolio Contact] ${subject}`,
-        text: body,
+        text: `From: ${email}\n\n${body}`,
         replyTo: email,
       });
 

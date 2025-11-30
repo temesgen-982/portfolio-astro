@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { MapPin, Phone, MoveRight } from 'lucide-svelte';
+import { MapPin, Phone, MoveRight, Loader2 } from 'lucide-svelte';
 import CopyButton from '../components/CopyButton.svelte';
 
 const email = "tedenadane@gmail.com"
@@ -39,8 +39,8 @@ const email = "tedenadane@gmail.com"
           </div>
         </div>
       </div>
-      <form id="contact-form" class="flex flex-col gap-4">
-        <div class="flex flex-col gap-8">
+      <form id="contact-form" class="flex flex-col">
+        <div class="flex flex-col gap-5">
           <div class="flex flex-col gap-3">
             <label for="email" class="sr-only">Your email:</label>
             <input
@@ -75,6 +75,8 @@ const email = "tedenadane@gmail.com"
             ></textarea>
           </div>
           <label class="sr-only">Leave this blank: <input type="text" name="honeypot" /></label>
+          <div class="grid gap-1">
+          <div id="result" aria-live="polite" class="text-sm min-h-[1rem] font-semibold"></div>
           <button
             type="submit"
             id="submit-btn"
@@ -82,7 +84,12 @@ const email = "tedenadane@gmail.com"
           >
             Send message
           </button>
-          <div id="result" aria-live="polite" class="text-sm"></div>
+          <div id="loading-indicator" class="py-3 hidden flex items-center justify-center gap-2 text-dark-slate dark:text-linen-white">
+            <Loader2 class="animate-spin" size={20} />
+            <span>Sending...</span>
+          </div>
+          </div>
+          
         </div>
       </form>
     </div>
@@ -91,15 +98,17 @@ const email = "tedenadane@gmail.com"
 
   <script>
     import { actions } from 'astro:actions';
-    const form = document.getElementById('contact-form');
+    const form = document.getElementById('contact-form') as HTMLFormElement;
     const result = document.getElementById('result');
-    const submitBtn = document.getElementById('submit-btn');
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+    const loadingIndicator = document.getElementById('loading-indicator');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      submitBtn.disabled = true;
-      result.textContent = 'Sending...';
-      result.style.color = '';
+      submitBtn.classList.add('hidden');
+      loadingIndicator.classList.remove('hidden');
+      result.textContent = '';
+      result.className = 'text-sm min-h-[1.5rem] font-semibold'; // Reset classes
 
       try {
         const formData = new FormData(form);
@@ -107,29 +116,26 @@ const email = "tedenadane@gmail.com"
 
         if (error) {
           result.textContent = error.message;
-          result.style.color = 'red';
+          result.classList.add('text-red-600', 'dark:text-red-400');
+          
           // Display field-specific errors if available
           if (error.cause?.issues) {
             const errorMessages = error.cause.issues.map(issue => `${issue.path[0]}: ${issue.message}`).join('; ');
             result.textContent = `Error: ${errorMessages}`;
           }
         } else {
-          result.textContent = data.message;
-          result.style.color = 'green';
+          result.textContent = data.message || 'Message sent successfully!';
+          result.classList.add('text-green-600', 'dark:text-green-400');
           form.reset();
         }
       } catch (err) {
         result.textContent = 'Error: Something went wrong';
-        result.style.color = 'red';
+        result.classList.add('text-red-600', 'dark:text-red-400');
       } finally {
-        submitBtn.disabled = false;
+        submitBtn.classList.remove('hidden');
+        loadingIndicator.classList.add('hidden');
       }
     });
   </script>
 
-  <style>
-    #result {
-      margin-top: 0.5rem;
-      font-weight: bold;
-    }
-  </style>
+
