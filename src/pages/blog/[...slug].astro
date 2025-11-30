@@ -15,18 +15,20 @@ const { Content } = await post.render();
 ---
 
 <Layout title={post.data.title}>
-    <article class="container mx-auto px-4 md:px-0 py-12">
+    <article class="py-12 overflow-hidden">
         {post.data.heroImage && (
-            <img 
-                src={post.data.heroImage} 
-                alt={post.data.title} 
-                class="w-full h-auto aspect-video object-cover rounded-lg mb-8 border border-gray-800"
-            />
+            <div class="mb-8">
+                <img 
+                    src={post.data.heroImage} 
+                    alt={post.data.title} 
+                    class="w-full h-auto aspect-video object-cover rounded-lg border border-gray-800"
+                />
+            </div>
         )}
         
         <div class="mb-8">
             <h1 class="text-3xl font-bold mb-4">{post.data.title}</h1>
-            <div class="text-gray-400 flex gap-4">
+            <div class="text-gray-400 flex flex-wrap gap-4">
                 <time datetime={post.data.pubDate.toISOString()}>
                     {post.data.pubDate.toLocaleDateString('en-US', {
                         year: 'numeric',
@@ -35,7 +37,7 @@ const { Content } = await post.render();
                     })}
                 </time>
                 {post.data.tags && (
-                    <div class="flex gap-2">
+                    <div class="flex flex-wrap gap-2">
                         {post.data.tags.map(tag => (
                             <span class="bg-gray-800 px-2 py-1 rounded text-sm">#{tag}</span>
                         ))}
@@ -44,7 +46,7 @@ const { Content } = await post.render();
             </div>
         </div>
 
-        <div class="prose prose-invert max-w-3xl prose-pre:overflow-x-auto">
+        <div class="prose prose-invert max-w-full prose-pre:overflow-x-auto prose-img:max-w-full">
             <Content />
         </div>
     </article>
