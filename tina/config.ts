@@ -48,6 +48,12 @@ export default defineConfig({
             ],
           },
           { type: "string", name: "email", label: "Email", required: true },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Body",
+            isBody: true,
+          },
         ],
       },
       {
