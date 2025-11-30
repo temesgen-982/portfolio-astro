@@ -12,5 +12,7 @@ email: 'mailto:tedenadane@gmail.com'
 ---
 
 I am a 21yo developer who loves to code and make things.<br>
-Check out my \[/projects]\(https\://temesgen.vercel.app/projects).<br>
+Check out my \<a href="/projects" class="underline decoration-brand-teal underline-offset-2">projects\</a>
+
+<br>
 I am currently undertaking my Bachelor's degree at AAU.
