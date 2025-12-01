@@ -329,7 +329,7 @@ What we built:
 * Undo and redo any action
 * Fully reactive state with Svelte 5 runes
 
-This is a great example of how declarative + reactive UI can be powerful *and* minimal. If you want to go further, you could:
+If you want to go further, you could:
 
 * Add diameter editing as per the challenge
 * Add keyboard shortcuts for undo/redo
