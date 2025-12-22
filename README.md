@@ -1,75 +1,98 @@
-# Portfolio – Astro & Svelte
+# Portfolio – Astro, Svelte & Tina CMS
 
-A modern, fast, and fully customizable developer portfolio built with [Astro](https://astro.build/), [Svelte](https://svelte.dev/), and [Tailwind CSS](https://tailwindcss.com/).
+A modern, high-performance developer portfolio built with [Astro](https://astro.build/), [Svelte](https://svelte.dev/), [Tina CMS](https://tina.io/), and [Tailwind CSS](https://tailwindcss.com/). Managed by a powerful visual editor.
 
 ## 🛠️ Technologies Used
 
-- Astro
-- Svelte
-- Tailwind CSS
-- TypeScript
-- Octokit (GitHub API)
-- Resend (email API)
-- Zod (form validation)
-- astro-icon, lucide-svelte (icons)
+- **Framework:** [Astro 5](https://astro.build/)
+- **UI library:** [Svelte 5](https://svelte.dev/)
+- **CMS:** [Tina CMS](https://tina.io/) (Visual Headless CMS)
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **Integrations:**
+  - `octokit` (GitHub API)
+  - `resend` (Email API)
+  - `zod` (Validation)
+  - `lucide-svelte` & `astro-icon` (Iconography)
 
 ## 🚀 Getting Started
 
-### Installation
+### 1. Installation
+
 ```bash
 git clone https://github.com/temesgen-982/portfolio-astro.git
 cd portfolio-astro
 pnpm install
 ```
 
-### Environment Variables
-Create a `.env` file in the root with the following (get your own API keys):
+### 2. Environment Variables
 
-```
+Create a `.env` file in the root and add your API keys:
+
+```bash
+# GitHub & Dev.to (Optional)
 GITHUB_TOKEN=your_github_token
 DEV_TO_API_KEY=your_devto_api_key
 DEV_TO_USERNAME=your_devto_username
+
+# Email Service
 RESEND_API_KEY=your_resend_api_key
+
+# Tina CMS (For Cloud hosting)
+NEXT_PUBLIC_TINA_CLIENT_ID=your_tina_client_id
+TINA_TOKEN=your_tina_token
 ```
 
-### Development
+### 3. Development
+
+Run the development server which starts both Astro and the Tina CMS local visual editor:
+
 ```bash
 pnpm run dev
 ```
 
-### Build
+- Local Site: `http://localhost:4321`
+- **Tina Admin:** `http://localhost:4321/admin/index.html`
+
+### 4. Build & Preview
+
 ```bash
-npm run build
+pnpm run build
+pnpm run preview
 ```
 
-### Preview
-```bash
-npm run preview
-```
+## ✍️ Content Management (Tina CMS)
+
+This portfolio uses **Tina CMS** for seamless content management. You can edit your profile, work experience, projects, and blog posts directly through a visual interface.
+
+1. Run the project locally (`pnpm run dev`).
+2. Navigate to `/admin/index.html`.
+3. Log in (for local dev, no login is usually required).
+4. Start editing your content visually!
 
 ## 📁 Project Structure
 
-```
+```text
 /
-├── public/                # Static assets
+├── public/                # Static assets & Tina Admin output
 ├── src/
 │   ├── assets/            # Images, SVGs
-│   ├── components/        # Astro & Svelte components
-│   ├── content/           # Content collections (work, education)
-│   ├── layouts/           # Layout components
-│   ├── lib/               # Utility libraries (GitHub, posts, skills)
-│   ├── pages/             # Astro pages (index, blog, projects, contact)
-│   └── styles/            # Global CSS (Tailwind)
-├── package.json
-└── astro.config.mjs
+│   ├── components/        # Svelte & Astro components
+│   ├── content/           # Markdown collections managed by Tina
+│   ├── layouts/           # Page layouts
+│   ├── lib/               # Utilities & logic
+│   └── pages/             # Astro routes
+├── tina/                  # Tina CMS configuration & schema
+├── astro.config.mjs       # Astro configuration
+└── package.json           # Dependencies & scripts
 ```
 
 ## 📝 Customization
 
-- **Add work experience:** Add markdown files to `src/content/work/`.
-- **Add education:** Add markdown files to `src/content/education/`.
-- **Update skills:** Edit `src/lib/skills.ts`.
-- **Update social links:** Edit `src/components/Hero.astro` and `Footer.astro`.
+While most content is managed through **Tina CMS**, you can still customize the underlying logic:
+
+- **CMS Schema:** Modify `tina/config.ts` to add new fields or collections.
+- **Styling:** Update `src/styles/` or individual component styles.
+- **Logic:** Adjust data fetching in `src/lib/`.
 
 ## ☁️ Deployment
 
