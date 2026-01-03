@@ -1,5 +1,5 @@
 ---
-company: Gasha Digital
+company: Gasha Digital Technologies
 role: Web Developer
 location: Addis Ababa
 startDate: 2025-10-20T00:00:00.000Z
