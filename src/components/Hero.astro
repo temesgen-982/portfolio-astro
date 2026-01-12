@@ -1,12 +1,12 @@
 ---
-import { Image } from 'astro:assets';
-import avatarImage from '../assets/potrait.webp';
-import { Twitter, Linkedin, Github, MapPin, Mail, FileDown } from 'lucide-svelte';
-import type { CollectionEntry } from 'astro:content';
+import { Image } from "astro:assets";
+import avatarImage from "../assets/potrait.webp";
+import { Send, Linkedin, Github, MapPin, Mail, FileDown } from "lucide-svelte";
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-	profileData: CollectionEntry<'profile'>['data'];
-  ProfileContent: any;
+    profileData: CollectionEntry<"profile">["data"];
+    ProfileContent: any;
 }
 
 const { profileData, ProfileContent } = Astro.props;
@@ -26,34 +26,60 @@ const { profileData, ProfileContent } = Astro.props;
             fetchpriority="high"
         />
     </div>
-    <div class="grid flex-wrap items-center content-center grow justify-start justify-items-start gap-3">
+    <div
+        class="grid flex-wrap items-center content-center grow justify-start justify-items-start gap-3"
+    >
         <div class="flex flex-col gap-2">
-      <h1 class="text-3xl text-dark-slate dark:text-linen-white">{profileData.name}</h1>
-      <p class="text-medium-gray">{profileData.title}</p>
+            <h1 class="text-3xl text-dark-slate dark:text-linen-white">
+                {profileData.name}
+            </h1>
+            <p class="text-medium-gray">{profileData.title}</p>
         </div>
         <div class="flex flex-col leading-relaxed">
             <div class="prose prose-invert -mt-2">
                 <ProfileContent />
             </div>
-      <p class="flex items-center gap-1 text-medium-gray"><MapPin strokeWidth={1.25} size={16} />Addis Ababa</p>
+            <p class="flex items-center gap-1 text-medium-gray">
+                <MapPin strokeWidth={1.25} size={16} />Addis Ababa
+            </p>
         </div>
-    <div class="flex gap-4">
-      <div class="social-link-container">
-            <a class="social-link" href="https://x.com/temesgen982" target="_blank"> 
-                <Twitter strokeWidth={1} />
-            </a> 
-            <a class="social-link" href="https://www.linkedin.com/in/temesgen-adane/" target="_blank"> 
-                <Linkedin strokeWidth={1} /> 
-            </a>
-            <a class="social-link" href="https://github.com/temesgen-982" target="_blank"> 
-                <Github strokeWidth={1} />
-            </a>
-      </div>
-            <a href="https://drive.google.com/file/d/1Z-0wBog0ItZtPu1qMKt99CCHvthM4bMT/view?usp=sharing" target="_blank" class="social-link-container social-link"> 
+        <div class="flex gap-4">
+            <div class="social-link-container">
+                <a
+                    class="social-link"
+                    href="https://t.me/beshow"
+                    target="_blank"
+                >
+                    <Send strokeWidth={1} />
+                </a>
+                <a
+                    class="social-link"
+                    href="https://www.linkedin.com/in/temesgen-adane/"
+                    target="_blank"
+                >
+                    <Linkedin strokeWidth={1} />
+                </a>
+                <a
+                    class="social-link"
+                    href="https://github.com/temesgen-982"
+                    target="_blank"
+                >
+                    <Github strokeWidth={1} />
+                </a>
+            </div>
+            <a
+                href="https://drive.google.com/file/d/1Z-0wBog0ItZtPu1qMKt99CCHvthM4bMT/view?usp=sharing"
+                target="_blank"
+                class="social-link-container social-link"
+            >
                 <FileDown strokeWidth={1.25} />
-                <span class="text-dark-slate dark:text-linen-white">Resume</span>
+                <span class="text-dark-slate dark:text-linen-white">Resume</span
+                >
             </a>
-            <a href="mailto:tedenadane@gmail.com" class="flex gap-2 p-2 items-center border border-dark-slate/50 rounded hover:text-brand-teal dark:bg-brand-teal/5 bg-light-gray dark:hover:bg-brand-teal/5 dark:border-brand-teal dark:hover:text-brand-teal"> 
+            <a
+                href="mailto:tedenadane@gmail.com"
+                class="flex gap-2 p-2 items-center border border-dark-slate/50 rounded hover:text-brand-teal dark:bg-brand-teal/5 bg-light-gray dark:hover:bg-brand-teal/5 dark:border-brand-teal dark:hover:text-brand-teal"
+            >
                 <Mail strokeWidth={1.25} />
                 <span class="text-dark-slate dark:text-linen-white">Email</span>
             </a>
