@@ -1,104 +1,25 @@
 ---
-import { SKILLS_DATA } from '../lib/skills';
-import SkillTag from './SkillTag.astro';
+import { SKILLS_DATA } from "../lib/skills";
+import SkillTag from "./SkillTag.astro";
 ---
 
 <section>
   <h2 class="text-2xl mb-4 dark:text-linen-white">Skills</h2>
 
-  <!-- Categories -->
-  <div class="tabs flex gap-8 border-b-1 border-dark-slate dark:border-linen-white/30 border-dark mb-3 relative" id="skills-tabs">
-    {SKILLS_DATA.map(categoryGroup => {
-      const id = categoryGroup.category.toLowerCase().replace(/\s+/g, "-");
-      return (
-        <div 
-          class="tab cursor-pointer pb-2 font-medium transition-colors duration-300 relative"
-          data-category={id}
-        >
-          {categoryGroup.category}
-        </div>
-      );
-    })}
-    <div class="underline absolute bottom-0 h-1 bg-brand-teal transition-all duration-300"></div>
-  </div>
-
-  <!-- Languages / frameworks -->
-  <div class="tab-contents">
-    {SKILLS_DATA.map(categoryGroup => {
-      const id = categoryGroup.category.toLowerCase().replace(/\s+/g, "-");
-      return (
-        <div 
-          class="tab-content opacity-0 hidden transition-all duration-400 transform translate-y-2.5"
-          id={id}
-        >
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {
+      SKILLS_DATA.map((categoryGroup) => (
+        <div class="bg-dark-slate/2 dark:bg-linen-white/2 p-4 rounded-lg border-1 border-dark-slate/2 dark:border-linen-white/2">
+          <h3 class="text-lg font-medium mb-3 pl-2 border-l-2 border-brand-teal dark:text-linen-white/80 text-dark-slate/80">
+            {categoryGroup.category}
+          </h3>
           <div class="flex flex-wrap gap-2">
-            {categoryGroup.skills.map(skill => (
+            {categoryGroup.skills.map((skill) => (
               <SkillTag skill={skill} />
             ))}
           </div>
         </div>
-      );
-    })}
+      ))
+    }
   </div>
-
-  <script>
-    const tabs = document.querySelectorAll('#skills-tabs .tab');
-    const contents = document.querySelectorAll('.tab-content');
-    const underline = document.querySelector('.underline');
-
-    function moveUnderline(activeTab) {
-      underline.style.width = activeTab.offsetWidth + 'px';
-      underline.style.left = activeTab.offsetLeft + 'px';
-    }
-
-    // Activate first tab by default
-    if (tabs.length > 0) {
-      const firstTab = tabs[0];
-      firstTab.classList.add('active');
-      const firstCategory = firstTab.dataset.category;
-      const firstContent = document.getElementById(firstCategory);
-      if (firstContent) {
-        firstContent.classList.add('active');
-        firstContent.classList.remove('hidden');
-      }
-      moveUnderline(firstTab);
-    }
-
-    // Add click events
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        // Remove active from all
-        tabs.forEach(t => t.classList.remove('active'));
-        contents.forEach(c => {
-          c.classList.remove('active');
-          c.classList.add('hidden');
-        });
-
-        // Activate clicked tab + content
-        tab.classList.add('active');
-        const category = tab.dataset.category;
-        const content = document.getElementById(category);
-        if (content) {
-          content.classList.add('active');
-          content.classList.remove('hidden');
-        }
-
-        moveUnderline(tab);
-      });
-    });
-
-    window.addEventListener('resize', () => {
-      const activeTab = document.querySelector('#skills-tabs .tab.active');
-      if (activeTab) moveUnderline(activeTab);
-    });
-  </script>
-
-  <style>
-    .tab-content.active {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
 </section>
-
