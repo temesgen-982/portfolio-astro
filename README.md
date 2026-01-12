@@ -1,22 +1,33 @@
 # Portfolio – Astro, Svelte & Tina CMS
 
-A modern, high-performance developer portfolio built with [Astro](https://astro.build/), [Svelte](https://svelte.dev/), [Tina CMS](https://tina.io/), and [Tailwind CSS](https://tailwindcss.com/). Managed by a powerful visual editor.
+A modern, high-performance developer portfolio built with [Astro](https://astro.build/), [Svelte](https://svelte.dev/), [Tina CMS](https://tina.io/), and [Tailwind CSS](https://tailwindcss.com/).
 
-## 🛠️ Technologies Used
+**Live Site:** [temesgen.vercel.app](https://temesgen.vercel.app)
 
-- **Framework:** [Astro 5](https://astro.build/)
-- **UI library:** [Svelte 5](https://svelte.dev/)
-- **CMS:** [Tina CMS](https://tina.io/) (Visual Headless CMS)
-- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
-- **Integrations:**
-  - `octokit` (GitHub API)
-  - `resend` (Email API)
-  - `zod` (Validation)
-  - `lucide-svelte` & `astro-icon` (Iconography)
+## ✨ Features
+
+- **Visual Content Editing** – Manage profile, work experience, education, projects, and blog posts via Tina CMS
+- **Contact Form** – Server-side form handling with Astro Actions, Resend email API, Zod validation, and honeypot spam protection
+- **Dark Mode** – Full dark/light theme support
+- **SEO Optimized** – Auto-generated sitemap and robots.txt
+- **Responsive Design** – Mobile-first layouts with modern CSS
+
+## 🛠️ Tech Stack
+
+| Category | Technologies |
+|----------|-------------|
+| **Framework** | [Astro 5](https://astro.build/) |
+| **UI Library** | [Svelte 5](https://svelte.dev/) |
+| **CMS** | [Tina CMS](https://tina.io/) (Visual Headless CMS) |
+| **Styling** | [Tailwind CSS 4](https://tailwindcss.com/) |
+| **Email** | [Resend](https://resend.com/) |
+| **Validation** | [Zod](https://zod.dev/) |
+| **Icons** | [Lucide](https://lucide.dev/) + [Iconify](https://iconify.design/) |
+| **Deployment** | [Vercel](https://vercel.com/) |
 
 ## 🚀 Getting Started
 
-### 1. Installation
+### 1. Clone & Install
 
 ```bash
 git clone https://github.com/temesgen-982/portfolio-astro.git
@@ -26,32 +37,25 @@ pnpm install
 
 ### 2. Environment Variables
 
-Create a `.env` file in the root and add your API keys:
+Create a `.env` file in the root:
 
 ```bash
-# GitHub & Dev.to (Optional)
-GITHUB_TOKEN=your_github_token
-DEV_TO_API_KEY=your_devto_api_key
-DEV_TO_USERNAME=your_devto_username
-
-# Email Service
+# Email Service (Required for contact form)
 RESEND_API_KEY=your_resend_api_key
 
-# Tina CMS (For Cloud hosting)
+# Tina CMS (Required for cloud hosting)
 NEXT_PUBLIC_TINA_CLIENT_ID=your_tina_client_id
 TINA_TOKEN=your_tina_token
 ```
 
 ### 3. Development
 
-Run the development server which starts both Astro and the Tina CMS local visual editor:
-
 ```bash
 pnpm run dev
 ```
 
-- Local Site: `http://localhost:4321`
-- **Tina Admin:** `http://localhost:4321/admin/index.html`
+- **Site:** http://localhost:4321
+- **Tina Admin:** http://localhost:4321/admin/index.html
 
 ### 4. Build & Preview
 
@@ -60,40 +64,62 @@ pnpm run build
 pnpm run preview
 ```
 
-## ✍️ Content Management (Tina CMS)
-
-This portfolio uses **Tina CMS** for seamless content management. You can edit your profile, work experience, projects, and blog posts directly through a visual interface.
-
-1. Run the project locally (`pnpm run dev`).
-2. Navigate to `/admin/index.html`.
-3. Log in (for local dev, no login is usually required).
-4. Start editing your content visually!
-
 ## 📁 Project Structure
 
-```text
-/
-├── public/                # Static assets & Tina Admin output
+```
+├── public/                  # Static assets & Tina Admin output
 ├── src/
-│   ├── assets/            # Images, SVGs
-│   ├── components/        # Svelte & Astro components
-│   ├── content/           # Markdown collections managed by Tina
-│   ├── layouts/           # Page layouts
-│   ├── lib/               # Utilities & logic
-│   └── pages/             # Astro routes
-├── tina/                  # Tina CMS configuration & schema
-├── astro.config.mjs       # Astro configuration
-└── package.json           # Dependencies & scripts
+│   ├── actions/             # Astro server actions (contact form)
+│   ├── assets/              # Images, SVGs
+│   ├── components/          # Astro & Svelte components
+│   ├── content/             # Markdown content (managed by Tina)
+│   │   ├── profile/         # Personal info & bio
+│   │   ├── work/            # Work experience entries
+│   │   ├── education/       # Education entries
+│   │   ├── projects/        # Portfolio projects
+│   │   └── posts/           # Blog posts
+│   ├── layouts/             # Page layouts
+│   ├── lib/                 # Utilities (skills data, etc.)
+│   ├── pages/               # Astro routes
+│   └── styles/              # Global styles
+├── tina/                    # Tina CMS configuration & schema
+└── astro.config.mjs         # Astro configuration
 ```
 
-## 📝 Customization
+## ✍️ Content Management
 
-While most content is managed through **Tina CMS**, you can still customize the underlying logic:
+Edit content visually through Tina CMS:
 
-- **CMS Schema:** Modify `tina/config.ts` to add new fields or collections.
-- **Styling:** Update `src/styles/` or individual component styles.
-- **Logic:** Adjust data fetching in `src/lib/`.
+1. Run `pnpm run dev`
+2. Navigate to `/admin/index.html`
+3. Edit your content – changes save directly to markdown files
+
+### Content Collections
+
+| Collection | Description |
+|------------|-------------|
+| **Profile** | Name, title, location, social links, bio |
+| **Work** | Job title, company, dates, location, description |
+| **Education** | Degree, school, dates, location |
+| **Projects** | Title, description, screenshot, live/GitHub links, tags |
+| **Posts** | Blog posts with rich text, hero image, tags |
+
+## 🎨 Customization
+
+- **Skills:** Edit `src/lib/skills.ts` to update skill categories and items
+- **CMS Schema:** Modify `tina/config.ts` to add new fields or collections
+- **Styling:** Update `src/styles/` or component-level styles
+- **Theme Colors:** Configured in Tailwind (linen-white, dark-slate, brand-teal)
 
 ## ☁️ Deployment
 
-This project is ready to deploy on platforms like **Vercel** or **Netlify**.
+Optimized for **Vercel** with the `@astrojs/vercel` adapter pre-configured.
+
+1. Push to GitHub
+2. Import project in Vercel
+3. Add environment variables
+4. Deploy
+
+## 📄 License
+
+MIT
